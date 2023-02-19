@@ -1,2 +1,1 @@
-export * from './lib/Button';
-export * from './lib/Ui';
+export * from './lib/Button/Button';
