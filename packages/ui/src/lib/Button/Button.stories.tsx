@@ -1,4 +1,6 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+
+import AppThemeProvider from '../AppThemeProvider';
 import Button from './Button';
 
 const Story: ComponentMeta<typeof Button> = {
@@ -8,13 +10,15 @@ const Story: ComponentMeta<typeof Button> = {
 export default Story;
 
 const Template: ComponentStory<typeof Button> = args => (
-  <Button
-    {...args}
-    onClick={function () {
-      alert('Button Clicked');
-    }}>
-    Primary
-  </Button>
+  <AppThemeProvider>
+    <Button
+      {...args}
+      onClick={function () {
+        alert('Button Clicked');
+      }}>
+      Primary
+    </Button>
+  </AppThemeProvider>
 );
 
 export const PrimaryButton = Template.bind({});

@@ -1,1 +1,2 @@
-export * from './lib/Button/Button';
+export * from './lib/AppThemeProvider';
+export * from './lib/Button';

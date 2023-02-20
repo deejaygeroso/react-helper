@@ -4,6 +4,12 @@
   "endOfLine": "auto",
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
+  "importOrder": [
+    "react(.*)$",
+    "@react-helper/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^[./]"
+  ],
   "jsxBracketSameLine": true,
   "jsxSingleQuote": true,
   "parser": "typescript",
