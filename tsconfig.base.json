@@ -18,9 +18,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@react-helper/theme": [
-        "packages/theme/src/index.ts"
-      ],
       "@react-helper/ui": [
         "packages/ui/src/index.ts"
       ]
