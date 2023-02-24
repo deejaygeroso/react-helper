@@ -22,7 +22,6 @@ module.exports = {
   root: true,
   rules: {
     'no-console': ['warn', { allow: ['info', 'error'] }],
-    'prettier/prettier': 'error',
     'react/jsx-sort-props': [
       'error',
       {
