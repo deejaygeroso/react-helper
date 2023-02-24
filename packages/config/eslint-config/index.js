@@ -1,6 +1,7 @@
 module.exports = {
   extends: [
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
+    'plugin:react-hooks/recommended', // Enforces Rules of React Hooks
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
     /* -----------------------------------------------------------------------------------------------------------------
      * Enables eslint-plugin-prettier and displays prettier errors as ESLint errors.
@@ -17,10 +18,11 @@ module.exports = {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
   },
-  plugins: ['@typescript-eslint', 'typescript-sort-keys'],
+  plugins: ['react-hooks', '@typescript-eslint', 'typescript-sort-keys'],
   root: true,
   rules: {
     'no-console': ['warn', { allow: ['info', 'error'] }],
+    'prettier/prettier': 'error',
     'react/jsx-sort-props': [
       'error',
       {
