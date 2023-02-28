@@ -55,24 +55,6 @@ const eslintSetting = {
      * Setting return type to void is much more readable.
      */
     'consistent-return': 'off',
-    /*
-     * Temporary Disabled. These are rules I agree with.
-     */
-    'no-plusplus': 'off',
-    'no-use-before-define': 'off',
-    'react/jsx-no-useless-fragment': 'off',
-    'arrow-body-style': 'off',
-    'react/button-has-type': 'off',
-    'react-hooks/exhaustive-deps': 'off',
-    'object-shorthand': 'off',
-    'jsx-a11y/no-static-element-interactions': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off',
-    'array-callback-return': 'off',
-    'no-else-return': 'off',
-    'react/jsx-boolean-value': 'off',
-    'react/destructuring-assignment': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    'import/newline-after-import': 'off',
   },
   settings: {
     react: {
