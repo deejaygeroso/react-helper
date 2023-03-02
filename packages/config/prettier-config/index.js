@@ -1,7 +1,8 @@
 module.exports = {
   arrowParens: 'avoid',
   bracketSpacing: true,
-  endOfLine: 'auto',
+  bracketSameLine: true,
+  endOfLine: 'lf',
   /*
    * importOrder is an extension of @trivago/prettier-plugin-sort-imports package
    */
@@ -18,13 +19,13 @@ module.exports = {
   ],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  jsxBracketSameLine: true,
   jsxSingleQuote: true,
   parser: 'typescript',
   plugins: [require('@trivago/prettier-plugin-sort-imports')],
   printWidth: 120,
   proseWrap: 'never',
   semi: false,
+  singleAttributePerLine: true,
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'all',
