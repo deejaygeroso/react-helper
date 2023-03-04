@@ -16,23 +16,6 @@ module.exports = {
   plugins: ['react-hooks', '@typescript-eslint', 'typescript-sort-keys'],
   root: true,
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'error',
-    '@typescript-eslint/no-inferrable-types': [
-      'error',
-      {
-        ignoreParameters: true,
-        ignoreProperties: true,
-      },
-    ],
-    '@typescript-eslint/typedef': [
-      'error',
-      {
-        arrowParameter: true,
-        memberVariableDeclaration: true,
-        propertyDeclaration: true,
-        variableDeclaration: false,
-      },
-    ],
     'no-console': ['warn', { allow: ['info', 'error'] }],
     'react/jsx-sort-props': [
       'error',
