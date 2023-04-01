@@ -2,11 +2,17 @@
   "name": "react-helper",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx affected --target=build --base=origin/main && changeset version",
+    "ui:build:storybook": "nx run ui:build-storybook",
+    "ui:run": "nx run ui:storybook",
+    "ui:build:prod": "nx run ui:build:production"
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "7.21.4",
     "@babel/preset-typescript": "7.21.4",
+    "@changesets/cli": "^2.26.1",
     "@nrwl/eslint-plugin-nx": "15.9.2",
     "@nrwl/js": "15.9.2",
     "@nrwl/linter": "15.9.2",
