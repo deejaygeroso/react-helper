@@ -1,5 +1,5 @@
 module.exports = {
-  arrowParens: 'avoid',
+  arrowParens: 'always',
   bracketSpacing: true,
   endOfLine: 'auto',
   /*
@@ -25,6 +25,7 @@ module.exports = {
   printWidth: 120,
   proseWrap: 'never',
   semi: false,
+  singleAttributePerLine: true,
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'all',
