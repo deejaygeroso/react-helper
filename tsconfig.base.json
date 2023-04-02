@@ -18,6 +18,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@react-helper/eslint-config": [
+        "packages/config/eslint-config/src/index.js"
+      ],
       "@react-helper/ui": [
         "packages/ui/src/index.ts"
       ]
