@@ -24,6 +24,9 @@
       "@react-helper/eslint-config-airbnb": [
         "packages/config/eslint-config-airbnb/src/index.js"
       ],
+      "@react-helper/prettier-config": [
+        "packages/config/prettier-config/src/index.js"
+      ],
       "@react-helper/ui": [
         "packages/ui/src/index.ts"
       ]
