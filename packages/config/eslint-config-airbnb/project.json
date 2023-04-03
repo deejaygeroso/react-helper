@@ -1,0 +1,41 @@
+{
+  "name": "eslint-config-airbnb",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/config/eslint-config-airbnb/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/config/eslint-config-airbnb",
+        "main": "packages/config/eslint-config-airbnb/src/index.js",
+        "tsConfig": "packages/config/eslint-config-airbnb/tsconfig.lib.json",
+        "assets": []
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs eslint-config-airbnb {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/config/eslint-config-airbnb/**/*.js"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

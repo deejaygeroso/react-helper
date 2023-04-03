@@ -1,13 +1,12 @@
-const eslintSetting = {
-  extends: ['airbnb', 'airbnb/hooks', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['react-hooks'],
+module.exports = {
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'prettier'],
   globals: {
     page: true,
     browser: true,
     context: true,
   },
-  plugins: ['@typescript-eslint'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-hooks', '@typescript-eslint'],
   rules: {
     /*
      * Disabling `import/prefer-default-export` gives us the flexibility to
@@ -65,5 +64,3 @@ const eslintSetting = {
     },
   },
 };
-
-module.exports = eslintSetting;
