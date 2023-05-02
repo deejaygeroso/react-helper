@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      assets-zip-exists: ${{ steps.assets-zip-exists.outputs.assets-zip-exists }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+       fetch-depth: 2
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.16.0'
+    - name: Install pNPM
+      run: npm install -g pnpm
+    - name: Install Dependencies
+      run: pnpm install
+    - name: Fetch Master Branch
+      run: git fetch origin master
+    - name: NX Build Affected Packages
+      run: pnpm affected:build
