@@ -3,12 +3,10 @@ name: Release
 on:
   push:
     branches:
-      - master
-      - develop
+      - main
   pull_request:
     branches:
-      - master
-      - develop
+      - main
 
 permissions:
   id-token: write
