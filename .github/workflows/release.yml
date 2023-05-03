@@ -37,15 +37,13 @@ jobs:
     - name: Changeset Version
       # run: npx changeset version
       run: |
-        output=$(npx changeset version)
         changeset_status=$(npx changeset status)
-        first_message=$(echo "$changeset_status" | grep -m1 "^ - " | head -n1 | sed -E 's/^\s+-\s+//')
-        echo "::set-output name=first_message::$first_message"
-        if [ "$output" = "Hello, world!" ]; then
-          echo "Output is equal to 'Hello, world!'"
+        echo "$changeset_status"
+        if [ "$changeset_status" = "🦋  error Some packages have been changed but no changesets were found. Run `changeset add` to resolve this error." ]; then
+          echo "EQUAL"
           exit 1
         else
-          echo "Output is not equal to 'Hello, world!'"
+          echo "Not EQUAL"
           exit 1
         fi
     - name: Proceed
