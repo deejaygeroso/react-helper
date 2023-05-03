@@ -1,5 +1,11 @@
 # @react-helper/ui
 
+## 0.0.4
+
+### Patch Changes
+
+- 2d2d9a6: Test 3
+
 ## 0.0.3
 
 ### Patch Changes
