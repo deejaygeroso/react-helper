@@ -40,6 +40,11 @@ jobs:
       run: pnpm run:all:build
     - name: Log UI Package.json
       run: cat dist/packages/ui/package.json
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: dist
     # - name: Changeset Version
     #   run: npx changeset version
     # - name: Commit Changeset
@@ -54,6 +59,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: dist
+        path: dist
     # - name: Checkout
     #   uses: actions/checkout@v3
     #   with:
