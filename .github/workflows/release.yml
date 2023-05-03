@@ -37,8 +37,15 @@ jobs:
     - name: Changeset Version
       # run: npx changeset version
       run: |
-        if npx changeset version | grep -q 'warn No unreleased changesets found, exiting'; then
-          echo "ERROR: No unreleased changesets found!"
+        output=$(npx changeset version)
+        changeset_status=$(npx changeset status)
+        first_message=$(echo "$changeset_status" | grep -m1 "^ - " | head -n1 | sed -E 's/^\s+-\s+//')
+        echo "::set-output name=first_message::$first_message"
+        if [ "$output" = "Hello, world!" ]; then
+          echo "Output is equal to 'Hello, world!'"
+          exit 1
+        else
+          echo "Output is not equal to 'Hello, world!'"
           exit 1
         fi
     - name: Proceed
