@@ -31,7 +31,7 @@ jobs:
     - name: Install Dependencies
       run: pnpm install
     - name: Changeset Version
-        run: npx changeset
+        run: changeset
     - name: Commit Changeset
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
