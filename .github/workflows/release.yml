@@ -38,6 +38,8 @@ jobs:
       run: npx changeset status
     - name: Build All
       run: pnpm run:all:build
+    - name: Log UI Package.json
+      run: cat dist/packages/ui/package.json
     # - name: Changeset Version
     #   run: npx changeset version
     # - name: Commit Changeset
