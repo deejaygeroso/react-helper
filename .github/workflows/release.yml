@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  # TODO: To be deleted
   pull_request:
     branches:
       - main
@@ -34,10 +35,16 @@ jobs:
       run: pnpm install
     - name: Fetch Main Branch
       run: git fetch origin main
+    # If system will detect no packages to be updated.
+    # Pipeline will fail.
+    # Build & Publish will not proceed.
     - name: Check Changeset Status
       run: npx changeset status
-    - name: Build All
-      run: pnpm run:all:build
+    # TODO: To be deleted
+    - name: Build UI only
+      run: pnpm ui:build:prod 
+    # TODO: Replace Build All
+    # Update Version of Packages based on Configured Changeset Version
     # - name: Changeset Version
     #   run: npx changeset version
     # - name: Commit Changeset
@@ -46,8 +53,10 @@ jobs:
     #     commit_message: "Update: Automated Package Version Update"
     #     commit_options: "--no-gpg-sign"
     #     commit_files: "./.changeset/**/*.md"
+    # Build Only the Packages that has changes detected or has its version updated.
     # - name: NX Build Affected Packages
     #   run: pnpm affected:build
+    # Upload dist directory to be reused by publish job.
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
@@ -57,19 +66,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: test-and-build
     steps:
+    # Download dist directory generated from build job.
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
         name: dist
         path: dist
-    # - name: Checkout
-    #   uses: actions/checkout@v3
-    #   with:
-    #    fetch-depth: 2
-    # - name: Set up Node.js
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: '18.16.0'
     - name: Test Node.js
       run: node --version
     - name: Log UI Package.json
