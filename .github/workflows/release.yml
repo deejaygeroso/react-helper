@@ -35,16 +35,23 @@ jobs:
     - name: Install Dependencies
       run: pnpm install
     - name: Changeset Version
-      run: npx changeset version
-    - name: Commit Changeset
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: "Update: Automated Package Version Update"
-        commit_options: "--no-gpg-sign"
-        commit_files: "./.changeset/**/*.md"
-    - name: Fetch Main Branch
-      run: git fetch origin main
-    - name: NX Build Affected Packages
-      run: pnpm affected:build
-    - name: Log UI Package.json
-      run: cat dist/packages/ui/package.json
+      # run: npx changeset version
+      run: |
+        if npx changeset version | grep -q 'warn No unreleased changesets found, exiting'; then
+          echo "ERROR: No unreleased changesets found!"
+          exit 1
+        fi
+    - name: Proceed
+      run: echo "Hello World"
+    # - name: Commit Changeset
+    #   uses: stefanzweifel/git-auto-commit-action@v4
+    #   with:
+    #     commit_message: "Update: Automated Package Version Update"
+    #     commit_options: "--no-gpg-sign"
+    #     commit_files: "./.changeset/**/*.md"
+    # - name: Fetch Main Branch
+    #   run: git fetch origin main
+    # - name: NX Build Affected Packages
+    #   run: pnpm affected:build
+    # - name: Log UI Package.json
+    #   run: cat dist/packages/ui/package.json
