@@ -13,8 +13,12 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  test-and-build:
     runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -32,18 +36,8 @@ jobs:
       run: git fetch origin main
     - name: Check Changeset Status
       run: npx changeset status
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
-    steps:
     - name: Build All
       run: pnpm run:all:build
-    - name: Log UI Package.json
-      run: cat dist/packages/ui/package.json
     # - name: Changeset Version
     #   run: npx changeset version
     # - name: Commit Changeset
@@ -61,7 +55,7 @@ jobs:
         path: dist
   publish:
     runs-on: ubuntu-latest
-    needs: build
+    needs: test-and-build
     steps:
     - name: Download artifact
       uses: actions/download-artifact@v3
