@@ -33,9 +33,9 @@ jobs:
       run: git fetch origin main
     # If system will detect no packages to be updated.
     # Pipeline will fail.
-    # # Build & Publish will not proceed.
-    # - name: Check Changeset Status
-    #   run: npx changeset status
+    # Build & Publish will not proceed.
+    - name: Check Changeset Status
+      run: npx changeset status
     # TODO: Replace
     - name: NX Build Affected Packages
       run: pnpm run:all:build
