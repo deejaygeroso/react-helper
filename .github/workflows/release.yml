@@ -42,3 +42,5 @@ jobs:
       run: git fetch origin main
     - name: NX Build Affected Packages
       run: pnpm affected:build
+    - name: Log UI Package.json
+      run: cat dist/packages/ui/package.json
