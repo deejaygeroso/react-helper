@@ -19,8 +19,6 @@ jobs:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository.
       contents: write
-    # outputs:
-    #   assets-zip-exists: ${{ steps.assets-zip-exists.outputs.assets-zip-exists }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -38,18 +36,16 @@ jobs:
       run: git fetch origin main
     - name: Check Changeset Status
       run: npx changeset status
-    # - name: Proceed
-    #   run: echo "Hello World"
-    - name: Changeset Version
-      run: npx changeset version
-    - name: Commit Changeset
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: "Update: Automated Package Version Update"
-        commit_options: "--no-gpg-sign"
-        commit_files: "./.changeset/**/*.md"
-    - name: NX Build Affected Packages
-      run: pnpm affected:build
+    # - name: Changeset Version
+    #   run: npx changeset version
+    # - name: Commit Changeset
+    #   uses: stefanzweifel/git-auto-commit-action@v4
+    #   with:
+    #     commit_message: "Update: Automated Package Version Update"
+    #     commit_options: "--no-gpg-sign"
+    #     commit_files: "./.changeset/**/*.md"
+    # - name: NX Build Affected Packages
+    #   run: pnpm affected:build
   publish:
     runs-on: ubuntu-latest
     needs: build
