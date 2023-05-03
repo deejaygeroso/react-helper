@@ -36,6 +36,8 @@ jobs:
       run: git fetch origin main
     - name: Check Changeset Status
       run: npx changeset status
+    - name: Build All
+      run: pnpm run:all:build
     # - name: Changeset Version
     #   run: npx changeset version
     # - name: Commit Changeset
