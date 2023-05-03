@@ -36,21 +36,18 @@ jobs:
     # # Build & Publish will not proceed.
     # - name: Check Changeset Status
     #   run: npx changeset status
-    # TODO: Replace
-    - name: NX Build Affected Packages
-      run: pnpm run:all:build
     # Update Version of Packages based on Configured Changeset Version
     - name: Changeset Version
       run: npx changeset version
-    # - name: Commit Changeset
-    #   uses: stefanzweifel/git-auto-commit-action@v4
-    #   with:
-    #     commit_message: "Update: Automated Package Version Update"
-    #     commit_options: "--no-gpg-sign"
-    #     commit_files: "./.changeset/**/*.md"
-    # # Build Only the Packages that has changes detected or has its version updated.
-    # - name: NX Build Affected Packages
-    #   run: pnpm affected:build
+    - name: Commit Changeset
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Update: Automated Package Version Update"
+        commit_options: "--no-gpg-sign"
+        commit_files: "./.changeset/**/*.md"
+    # Build Only the Packages that has changes detected or has its version updated.
+    - name: NX Build Affected Packages
+      run: pnpm affected:build
     # Upload dist directory to be reused by publish job.
     - name: Upload artifact
       uses: actions/upload-artifact@v3
@@ -74,12 +71,12 @@ jobs:
         path: dist
     - name: Install pNPM
       run: npm install -g pnpm
-    # - name: Publish packages
-    #   env:
-    #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-    #   run: |
-    #     cd dist/packages
-    #     for dir in */; do
-    #       (cd "$dir" && pnpm publish --access public)
-    #     done
+    - name: Publish packages
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      run: |
+        cd dist/packages
+        for dir in */; do
+          (cd "$dir" && pnpm publish --access public)
+        done
 
