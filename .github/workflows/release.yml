@@ -75,5 +75,5 @@ jobs:
     - name: Log UI Package.json
       run: cat dist/packages/ui/package.json
     - name: List Dist
-      run: ls -l dist/
+      run: ls -l dist/packages
 
