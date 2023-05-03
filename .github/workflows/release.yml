@@ -35,17 +35,17 @@ jobs:
     - name: Install Dependencies
       run: pnpm install
     - name: Changeset Version
-      # run: npx changeset version
-      run: |
-        changeset_status=$(npx changeset status)
-        echo "$changeset_status"
-        if [ "$changeset_status" = "🦋  error Some packages have been changed but no changesets were found. Run `changeset add` to resolve this error." ]; then
-          echo "EQUAL"
-          exit 1
-        else
-          echo "Not EQUAL"
-          exit 1
-        fi
+      run: npx changeset status
+      # run: |
+      #   changeset_status=$(npx changeset status)
+      #   echo "$changeset_status"
+      #   if [ "$changeset_status" = "🦋  error Some packages have been changed but no changesets were found. Run `changeset add` to resolve this error." ]; then
+      #     echo "EQUAL"
+      #     exit 1
+      #   else
+      #     echo "Not EQUAL"
+      #     exit 1
+      #   fi
     - name: Proceed
       run: echo "Hello World"
     # - name: Commit Changeset
