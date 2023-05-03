@@ -31,7 +31,7 @@ jobs:
         node-version: '18.16.0'
     # We will cache pNPM so we can just reuse it when publishing packages to npm.
     - name: Setup pNPM Cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -82,7 +82,7 @@ jobs:
         path: dist
     # Load Cached pNPM
     - name: Restore pNPM Cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
