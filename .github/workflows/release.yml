@@ -42,7 +42,7 @@ jobs:
       run: npx changeset status
     # TODO: To be deleted
     - name: Build UI only
-      run: pnpm ui:build:prod 
+      run: pnpm run:all:build
     # TODO: Replace Build All
     # Update Version of Packages based on Configured Changeset Version
     # - name: Changeset Version
