@@ -1,5 +1,11 @@
 # @react-helper/eslint-config-airbnb
 
+## 1.0.2
+
+### Patch Changes
+
+- Test Update
+
 ## 1.0.1
 
 ### Patch Changes
