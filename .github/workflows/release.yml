@@ -73,8 +73,7 @@ jobs:
         name: dist
         path: dist
     - name: Install pNPM
-    #   run: npm install -g pnpm
-      run: pnpm --version
+      run: npm install -g pnpm
     - name: Publish packages
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
