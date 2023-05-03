@@ -10,7 +10,7 @@
     "eslint-config:build": "nx run eslint-config:build",
     "eslint-config-airbnb:build": "nx run eslint-config-airbnb:build",
     "prettier-config:build": "nx run prettier-config:build",
-    "affected:build": "nx affected:build --base=origin/release",
+    "affected:build": "nx affected:build --base=origin/main",
     "run:all:lint": "nx run-many --targets=lint --all",
     "run:all:test": "nx run-many -t test",
     "run:all:build": "nx run-many --targets=build --all",
