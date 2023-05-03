@@ -37,7 +37,7 @@ jobs:
     - name: Fetch Main Branch
       run: git fetch origin main
     - name: Changeset Status
-      run: npx changeset status --since=origin/main
+      run: npx changeset status
     - name: Proceed
       run: echo "Hello World"
     # - name: Changeset Version
