@@ -13,17 +13,13 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # added or changed files to the repository.
-      contents: write
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-       fetch-depth: 2
+      fetch-depth: 2
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
@@ -36,15 +32,18 @@ jobs:
       run: git fetch origin main
     - name: Check Changeset Status
       run: npx changeset status
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
+    steps:
     - name: Build All
       run: pnpm run:all:build
     - name: Log UI Package.json
       run: cat dist/packages/ui/package.json
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist
-        path: dist
     # - name: Changeset Version
     #   run: npx changeset version
     # - name: Commit Changeset
@@ -55,12 +54,17 @@ jobs:
     #     commit_files: "./.changeset/**/*.md"
     # - name: NX Build Affected Packages
     #   run: pnpm affected:build
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist
   publish:
     runs-on: ubuntu-latest
     needs: build
     steps:
     - name: Download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: dist
         path: dist
@@ -76,4 +80,6 @@ jobs:
       run: node --version
     - name: Log UI Package.json
       run: cat dist/packages/ui/package.json
+    - name: List Dist
+      run: ls -l dist/
 
