@@ -42,7 +42,7 @@ jobs:
       run: npx changeset status
     # TODO: To be deleted
     - name: Build UI only
-      run: pnpm run:all:build
+      run: pnpm ui:build:prod 
     # TODO: Replace Build All
     # Update Version of Packages based on Configured Changeset Version
     # - name: Changeset Version
@@ -72,11 +72,12 @@ jobs:
       with:
         name: dist
         path: dist
-    # - name: Install pNPM
+    - name: Install pNPM
     #   run: npm install -g pnpm
+      run: pnpm --version
     - name: Publish packages
-      # env:
-      #   NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       # TODO: (cd "$dir" && pnpm publish --access public)
       run: |
         cd dist/packages
