@@ -19,8 +19,8 @@ jobs:
       # Give the default GITHUB_TOKEN write permission to commit and push the
       # added or changed files to the repository.
       contents: write
-    outputs:
-      assets-zip-exists: ${{ steps.assets-zip-exists.outputs.assets-zip-exists }}
+    # outputs:
+    #   assets-zip-exists: ${{ steps.assets-zip-exists.outputs.assets-zip-exists }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -36,7 +36,7 @@ jobs:
       run: pnpm install
     - name: Fetch Main Branch
       run: git fetch origin main
-    - name: Changeset Status
+    - name: Check Changeset Status
       run: npx changeset status
     - name: Proceed
       run: echo "Hello World"
@@ -52,3 +52,17 @@ jobs:
     #   run: pnpm affected:build
     # - name: Log UI Package.json
     #   run: cat dist/packages/ui/package.json
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+       fetch-depth: 2
+    # - name: Set up Node.js
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: '18.16.0'
+    - name: Test Node.js
+      run: node --version
+
