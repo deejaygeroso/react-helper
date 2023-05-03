@@ -72,10 +72,15 @@ jobs:
       with:
         name: dist
         path: dist
-    - name: Test Node.js
-      run: node --version
-    - name: Log UI Package.json
-      run: cat dist/packages/ui/package.json
-    - name: List Dist
-      run: ls -l dist/packages
+    # - name: Install pNPM
+    #   run: npm install -g pnpm
+    - name: Publish packages
+      # env:
+      #   NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      # TODO: (cd "$dir" && pnpm publish --access public)
+      run: |
+        cd dist/packages
+        for dir in */; do
+          (cd "$dir" && cat package.json)
+        done
 
