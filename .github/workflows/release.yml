@@ -41,13 +41,9 @@ jobs:
       if: steps.changesets.outputs.hasChangesets == 'false'
       run: exit 1
 
-    # Update Version of Packages based on Configured Changeset Version
-    - name: Changeset Version
-      run: npx changeset version
-
-    # Build Only the Packages that has changes detected or has its version updated.
-    - name: NX Build Affected Packages
-      run: pnpm affected:build
+    # # Update Version of Packages based on Configured Changeset Version
+    # - name: Changeset Version
+    #   run: npx changeset version
 
     # TODO: Testing Only
     - name: Create Release Pull Request or Publish to npm
@@ -55,6 +51,11 @@ jobs:
       uses: changesets/action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # Build Only the Packages that has changes detected or has its version updated.
+    - name: NX Build Affected Packages
+      run: pnpm affected:build
+
 
     # - name: Commit Changesets Update
     #   run: |
