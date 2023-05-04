@@ -86,11 +86,11 @@ jobs:
 
     - name: Go To Publish Directory
       run: |
-      ls -la
-      cd dist
-      ls -la
-      cd publish
-      ls -la
+        ls -la
+        cd dist
+        ls -la
+        cd publish
+        ls -la
 
     - name: Changeset Status
       run: npx changeset status
