@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "ci:publish": "pnpm publish -r",
     "ui:build:storybook": "nx run ui:build-storybook",
     "ui:build:prod": "nx run ui:build:production",
     "ui:run": "nx run ui:storybook",
