@@ -22,39 +22,65 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.16.0'
-        # registry-url: 'https://registry.npmjs.org'
+    - name: Setup
+      uses: ./.github/actions/setup
 
-    - name: Install pNPM
-      run: npm install -g pnpm
+    # - name: Fetch Main Branch
+    #   run: git fetch origin main
 
-    - name: Install Dependencies
-      run: pnpm install --frozen-lockfile
+    # # If project does not have changesets, then for now app will fail.
+    # - name: Check Changeset
+    #   if: steps.changesets.outputs.hasChangesets == 'false'
+    #   run: exit 1
 
-    - name: Fetch Main Branch
-      run: git fetch origin main
+    # # Update Version of Packages based on Configured Changeset Version
+    # - name: Changeset Version
+    #   run: npx changeset version
 
-    - name: Create Changeset Release Pull Request
-      id: changesets
-      uses: changesets/action@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
-    # If project does not have changesets, then for now app will fail.
-    - name: Check Changeset
-      if: steps.changesets.outputs.hasChangesets == 'false'
-      run: exit 1
+    # # Build Only the Packages that has changes detected or has its version updated.
+    # - name: NX Build Affected Packages
+    #   run: pnpm affected:build
 
     # Build Only the Packages that has changes detected or has its version updated.
     - name: NX Build Affected Packages
-      run: pnpm affected:build
+      run: pnpm ui:build:prod
     
-    - name: Modify Workspace File
-      run: sed -e "s|'packages\/|'dist/packages|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
+    # - name: Commit changes
+    #   run: |
+    #     git config --local user.email "actions@github.com"
+    #     git config --local user.name "GitHub Actions"
+    #     git add .
+    #     git commit -m "Commit message"
+    
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: main
 
-    - name: Publish
-      run: pnpm -r publish --access public
+    # Upload dist directory to be reused by publish job.
+    # - name: Upload artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: dist
+    #     path: dist
+
+  # publish:
+  #   runs-on: ubuntu-latest
+  #   needs: test-and-build
+  #   steps:
+  #   - name: Set up Node.js
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: '18.16.0'
+  #       registry-url: 'https://registry.npmjs.org'
+
+  #   # Download dist directory generated from build job.
+  #   - name: Download artifact
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: dist
+  #       path: dist
+
+  #   - name: Install pNPM
+  #     run: npm install -g pnpm
