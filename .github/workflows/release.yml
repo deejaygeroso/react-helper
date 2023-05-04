@@ -77,6 +77,9 @@ jobs:
         name: dist
         path: dist
 
+    - name: Check .npmrc
+      run: cat .npmrc
+
   publish:
     runs-on: ubuntu-latest
     needs: build
@@ -95,6 +98,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
 
+    - name: Set Config
+      run: npm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_AUTH_TOKEN }}
+
     - name: Install Dependencies
       run: pnpm install --frozen-lockfile
 
@@ -104,6 +110,9 @@ jobs:
       with:
         name: dist
         path: dist
+
+    - name: List Directories
+      uses: ls -la
 
     - name: Install pNPM
       run: npx changeset publish
