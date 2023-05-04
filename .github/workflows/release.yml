@@ -56,18 +56,18 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Commit Changesets Update
-      run: |
-        git config --local user.email "deejaygeroso@gmail.com"
-        git config --local user.name "Deejay Geroso [BOT]"
-        git add .
-        git commit -m "Update: Changeset Version Applied"
+    # - name: Commit Changesets Update
+    #   run: |
+    #     git config --local user.email "deejaygeroso@gmail.com"
+    #     git config --local user.name "Deejay Geroso [BOT]"
+    #     git add .
+    #     git commit -m "Update: Changeset Version Applied"
     
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: main
 
     # Upload dist directory to be reused by publish job.
     - name: Upload dist Directory
