@@ -88,6 +88,9 @@ jobs:
     - name: List Files
       run: ls -la
 
+    - name: Changeset Status
+      run: npx changeset status
+
     - name: Publish Packages
       run: npx changeset publish
       env:
