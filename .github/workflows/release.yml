@@ -3,7 +3,7 @@ name: Release Pipeline
 on:
   push:
     branches:
-      - release
+      - main
 
 permissions:
   id-token: write
@@ -33,29 +33,22 @@ jobs:
     - name: Install Dependencies
       run: pnpm install --frozen-lockfile
 
-    # - name: Fetch Main Branch
-    #   run: git fetch origin main
+    - name: Fetch Main Branch
+      run: git fetch origin main
 
-    # # If project does not have changesets, then for now app will fail.
-    # - name: Check Changeset
-    #   if: steps.changesets.outputs.hasChangesets == 'false'
-    #   run: exit 1
+    # If project does not have changesets, then for now app will fail.
+    - name: Check Changeset
+      if: steps.changesets.outputs.hasChangesets == 'false'
+      run: exit 1
 
-    # # Update Version of Packages based on Configured Changeset Version
-    # - name: Changeset Version
-    #   run: npx changeset version
-
-    # # Build Only the Packages that has changes detected or has its version updated.
-    # - name: NX Build Affected Packages
-    #   run: pnpm affected:build
+    # Update Version of Packages based on Configured Changeset Version
+    - name: Changeset Version
+      run: npx changeset version
 
     # Build Only the Packages that has changes detected or has its version updated.
     - name: NX Build Affected Packages
-      run: pnpm ui:build:prod
+      run: pnpm affected:build
 
-    - name: New File
-      run: touch delete_this.txt
-    
     - name: Commit Changesets Update
       run: |
         git config --local user.email "deejaygeroso@gmail.com"
@@ -63,21 +56,18 @@ jobs:
         git add .
         git commit -m "Update: Changeset Version Applied"
     
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     branch: main
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
 
     # Upload dist directory to be reused by publish job.
-    - name: Upload artifact
+    - name: Upload dist Directory
       uses: actions/upload-artifact@v3
       with:
         name: dist
         path: dist
-
-    - name: Check .npmrc
-      run: cat .npmrc
 
   publish:
     runs-on: ubuntu-latest
@@ -100,14 +90,11 @@ jobs:
       run: pnpm install --frozen-lockfile
 
     # Download dist directory generated from build job.
-    - name: Download artifact
+    - name: Download dist Directory
       uses: actions/download-artifact@v3
       with:
         name: dist
         path: dist
-
-    - name: List Directories
-      run: ls -la
 
     - name: Modify Workspace File
       run: sed -e "s|'packages\/|'dist/packages/|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
