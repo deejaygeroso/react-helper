@@ -84,16 +84,15 @@ jobs:
         name: dist
         path: dist
 
-    - name: Go To Publish Directory
+    - name: Check Status
       run: |
         ls -la
-        cd dist
+        cd dist/publish
         ls -la
-        cd publish
-        ls -la
+        npx changeset status
 
-    - name: Changeset Status
-      run: npx changeset status
+    - name: Check List
+      run: ls -la
 
     # - name: Publish Packages
     #   run: npx changeset publish
