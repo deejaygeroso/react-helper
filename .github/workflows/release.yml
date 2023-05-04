@@ -36,7 +36,7 @@ jobs:
     - name: Fetch Main Branch
       run: git fetch origin main
 
-    - name: Create Release Pull Request or Publish to npm
+    - name: Create Changeset Release Pull Request
       id: changesets
       uses: changesets/action@v1
       env:
@@ -47,32 +47,11 @@ jobs:
 
     - name: Check Changeset
       if: steps.changesets.outputs.hasChangesets == 'false'
-      # You can do something when a publish should happen.
-      run: return 1
+      run: exit 1
 
-    # # If system will detect no packages to be updated.
-    # # Pipeline will fail.
-    # # Build & Publish will not proceed.
-    # - name: Check Changeset Status
-    #   run: npx changeset status
-
-    # # Update Version of Packages based on Configured Changeset Version
-    # - name: Changeset Version
-    #   run: npx changeset version
-    # - name: Commit Changeset
-    #   uses: stefanzweifel/git-auto-commit-action@v4
-    #   with:
-    #     commit_message: "Update: Automated Package Version Update"
-    #     commit_options: "--no-gpg-sign"
-    #     commit_files: "./.changeset/**/*.md"
-
-    # # Build Only the Packages that has changes detected or has its version updated.
-    # - name: NX Build Affected Packages
-    #   run: pnpm affected:build
-
-    # # Build UI
-    - name: NX UI Only
-      run: pnpm ui:build:prod
+    # Build Only the Packages that has changes detected or has its version updated.
+    - name: NX Build Affected Packages
+      run: pnpm affected:build
 
     # Upload dist directory to be reused by publish job.
     - name: Upload artifact
