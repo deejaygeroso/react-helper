@@ -49,6 +49,13 @@ jobs:
     - name: NX Build Affected Packages
       run: pnpm affected:build
 
+    # TODO: Testing Only
+    - name: Create Release Pull Request or Publish to npm
+      id: changesets
+      uses: changesets/action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Commit Changesets Update
       run: |
         git config --local user.email "deejaygeroso@gmail.com"
