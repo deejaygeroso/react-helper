@@ -45,7 +45,7 @@ jobs:
     - name: Check Changeset
       if: steps.changesets.outputs.hasChangesets == 'false'
       # You can do something when a publish should happen.
-      run: exit 1 || true
+      run: return 1
 
     # # If system will detect no packages to be updated.
     # # Pipeline will fail.
