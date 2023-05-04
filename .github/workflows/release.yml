@@ -53,13 +53,12 @@ jobs:
 
     # Copy all the required files to perform changeset publish.
     - name: Copy Required Files to /dist Directory
-      run: cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
-
-    - name: Go To Publish Directory
-      run: cd dist
-
-    - name: List Files
-      run: ls -la
+      run: |
+        cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
+        cd dist
+        ls -la
+        cd publish
+        ls -la
 
     # Upload /dist directory to be reused by publish Job.
     - name: Upload /dist Directory
@@ -85,14 +84,13 @@ jobs:
         name: dist
         path: dist
 
-    - name: Install pNPM
-      run: npm install -g pnpm
-
     - name: Go To Publish Directory
-      run: cd dist
-
-    - name: List Files
-      run: ls -la
+      run: |
+      ls -la
+      cd dist
+      ls -la
+      cd publish
+      ls -la
 
     - name: Changeset Status
       run: npx changeset status
