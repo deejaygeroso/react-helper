@@ -86,12 +86,4 @@ jobs:
     - name: Check UI package.json
       run: cat dist/packages/ui/package.json
 
-    # - name: Publish packages
-    #   env:
-    #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-    #   run: |
-    #     cd dist/packages
-    #     for dir in */; do
-    #       (cd "$dir" && pnpm publish --access public)
-    #     done
 
