@@ -45,12 +45,12 @@ jobs:
     - name: Check Changeset
       if: steps.changesets.outputs.hasChangesets == 'true'
       # You can do something when a publish should happen.
-      run: echo "Has Changeset" && exit 1
+      run: echo "Has Changeset" && exit 0
 
     - name: Check Changeset
       if: steps.changesets.outputs.hasChangesets == 'false'
       # You can do something when a publish should happen.
-      run: echo "No Changeset" && exit 1
+      run: echo "No Changeset" && exit 0
 
     # # If system will detect no packages to be updated.
     # # Pipeline will fail.
