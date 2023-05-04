@@ -26,7 +26,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18.16.0'
-        registry-url: 'https://registry.npmjs.org'
+        # registry-url: 'https://registry.npmjs.org'
 
     - name: Install pNPM
       run: npm install -g pnpm
@@ -54,3 +54,6 @@ jobs:
     
     - name: Modify Workspace File
       run: sed -e "s|'packages\/|'dist/packages|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
+
+    - name: Publish
+      run: pnpm -r publish --access public
