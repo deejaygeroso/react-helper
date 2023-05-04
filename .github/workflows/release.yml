@@ -112,7 +112,7 @@ jobs:
         path: dist
 
     - name: List Directories
-      uses: ls -la
+      run: ls -la
 
     - name: Install pNPM
       run: npx changeset publish
