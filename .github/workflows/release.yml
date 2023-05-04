@@ -31,9 +31,6 @@ jobs:
       run: npm install -g pnpm
       
     - name: Install Dependencies
-      run: pnpm install
-
-    - name: Install Dependencies
       run: pnpm install --frozen-lockfile
 
     # - name: Fetch Main Branch
@@ -95,9 +92,6 @@ jobs:
 
     - name: Install pNPM
       run: npm install -g pnpm
-
-    - name: Install Dependencies
-      run: pnpm install
 
     - name: Install Dependencies
       run: pnpm install --frozen-lockfile
