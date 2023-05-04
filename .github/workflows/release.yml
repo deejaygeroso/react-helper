@@ -85,9 +85,6 @@ jobs:
     - name: Go To Publish Directory
       run: cd dist/publish
 
-    - name: Go To Publish Directory
-      run: cd dist/publish
-
     - name: Publish Packages
       run: npx changeset publish
       env:
