@@ -109,6 +109,12 @@ jobs:
     - name: List Directories
       run: ls -la
 
+    - name: Modify Workspace File
+      run: sed -e "s|'packages\/|'dist/packages/|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
+
+    - name: Check .npmrc
+      run: cat pnpm-workspace.yaml
+
     - name: Install pNPM
       run: npx changeset publish
       env:
