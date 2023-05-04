@@ -60,6 +60,8 @@ jobs:
       run: |
         cd dist/publish
         npx changeset publish
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     # # Upload /dist directory to be reused by publish Job.
     # - name: Upload /dist Directory
