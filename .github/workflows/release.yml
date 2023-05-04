@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  test-and-build:
+  build:
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
