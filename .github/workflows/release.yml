@@ -53,12 +53,12 @@ jobs:
 
     # Copy all the required files to perform changeset publish.
     - name: Copy Required Files used for Publishing Packages
-      run: cp -r package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
+      run: cp -r package.json pnpm-workspace.yaml .changeset dist/publish
 
     # Copy Publish Package
     - name: Publish All Packages
       uses: changesets/action@v1
-      run: |
+      with: |
         cd dist/publish
         npx changeset publish
       env:
