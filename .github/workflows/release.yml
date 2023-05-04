@@ -42,6 +42,7 @@ jobs:
       uses: changesets/action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     # If project does not have changesets, then for now app will fail.
     - name: Check Changeset
