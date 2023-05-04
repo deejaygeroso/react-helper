@@ -55,6 +55,12 @@ jobs:
     - name: Copy Required Files to /dist Directory
       run: cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
 
+    - name: Go To Publish Directory
+      run: cd dist
+
+    - name: List Files
+      run: ls -la
+
     # Upload /dist directory to be reused by publish Job.
     - name: Upload /dist Directory
       uses: actions/upload-artifact@v3
@@ -83,7 +89,7 @@ jobs:
       run: npm install -g pnpm
 
     - name: Go To Publish Directory
-      run: cd dist/publish
+      run: cd dist
 
     - name: List Files
       run: ls -la
@@ -91,8 +97,8 @@ jobs:
     - name: Changeset Status
       run: npx changeset status
 
-    - name: Publish Packages
-      run: npx changeset publish
-      env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+    # - name: Publish Packages
+    #   run: npx changeset publish
+    #   env:
+    #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
