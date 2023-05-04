@@ -22,8 +22,21 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Setup
-      uses: ./.github/actions/setup
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.16.0'
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.16.0'
+
+    - name: Install pNPM
+      run: npm install -g pnpm
+
+    - name: Install Dependencies
+      run: pnpm install --frozen-lockfile
 
     # - name: Fetch Main Branch
     #   run: git fetch origin main
