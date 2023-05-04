@@ -1,5 +1,11 @@
 # @react-helper/prettier-config
 
+## 1.1.3
+
+### Patch Changes
+
+- 216886b: Test Update
+
 ## 1.1.2
 
 ### Patch Changes
