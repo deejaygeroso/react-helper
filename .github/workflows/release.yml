@@ -60,7 +60,7 @@ jobs:
       run: |
         cd dist/publish
         ls -la
-        nx changeset status
+        npx changeset status
 
     # # Upload /dist directory to be reused by publish Job.
     # - name: Upload /dist Directory
