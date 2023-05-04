@@ -99,10 +99,7 @@ jobs:
     - name: Modify Workspace File
       run: sed -e "s|'packages\/|'dist/packages/|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
 
-    - name: Check .npmrc
-      run: cat pnpm-workspace.yaml
-
-    - name: Install pNPM
+    - name: Publish
       run: npx changeset publish
       env:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
