@@ -1,5 +1,11 @@
 # @react-helper/eslint-config
 
+## 1.2.3
+
+### Patch Changes
+
+- 075a6fc: Test Update
+
 ## 1.2.2
 
 ### Patch Changes
