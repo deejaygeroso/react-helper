@@ -56,11 +56,10 @@ jobs:
       run: cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
 
     # Copy Publish Package
-    - name: Copy Required Files used for Publishing Packages
+    - name: Publish All Packages
       run: |
         cd dist/publish
-        ls -la
-        npx changeset status
+        npx changeset publish
 
     # # Upload /dist directory to be reused by publish Job.
     # - name: Upload /dist Directory
