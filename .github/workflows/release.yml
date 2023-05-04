@@ -22,17 +22,16 @@ jobs:
       with:
         fetch-depth: 2
 
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
+        node-version: '18.16.0'
 
-    - name: Set Config
-      run: npm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_AUTH_TOKEN }}
+    - name: Install pNPM
+      run: npm install -g pnpm
+      
+    - name: Install Dependencies
+      run: pnpm install
 
     - name: Install Dependencies
       run: pnpm install --frozen-lockfile
@@ -89,17 +88,16 @@ jobs:
       with:
         node-version: '18.16.0'
 
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
+        node-version: '18.16.0'
 
-    - name: Set Config
-      run: npm config set '//registry.npmjs.org/:_authToken' ${{ secrets.NPM_AUTH_TOKEN }}
+    - name: Install pNPM
+      run: npm install -g pnpm
+
+    - name: Install Dependencies
+      run: pnpm install
 
     - name: Install Dependencies
       run: pnpm install --frozen-lockfile
