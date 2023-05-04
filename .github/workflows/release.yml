@@ -3,7 +3,7 @@ name: Release Pipeline
 on:
   push:
     branches:
-      - main
+      - release
 
 permissions:
   id-token: write
@@ -53,7 +53,7 @@ jobs:
       run: pnpm affected:build
     
     - name: Modify Workspace File
-      run: sed -e "s|'packages\/|'dist/publish/packages|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
+      run: sed -e "s|'packages\/|'dist/packages|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
 
     # Copy all the required files to perform changeset publish.
     - name: Copy Required Files used for Publishing Packages
