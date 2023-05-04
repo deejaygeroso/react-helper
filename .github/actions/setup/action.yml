@@ -14,15 +14,26 @@ runs:
       with:
         node-version: '18.16.0'
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v2
-      id: pnpm-install
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
       with:
-        version: 8
-        run_install: false
-        
+        node-version: '18.16.0'
+
+    - name: Install pNPM
+      run: npm install -g pnpm
+
     - name: Install Dependencies
       run: pnpm install --frozen-lockfile
+
+    # - name: Install pnpm
+    #   uses: pnpm/action-setup@v2
+    #   id: pnpm-install
+    #   with:
+    #     version: 8
+    #     run_install: false
+
+    # - name: Install Dependencies
+    #   run: pnpm install --frozen-lockfile
 
     # - name: Get pnpm store directory
     #   id: pnpm-cache
