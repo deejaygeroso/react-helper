@@ -51,15 +51,16 @@ jobs:
     - name: NX Build Affected Packages
       run: pnpm affected:build
 
-    - name: Publish Packages
+    # Copy all the required files to perform changeset publish.
+    - name: Copy Required Files used for Publishing Packages
+      run: cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
+
+    # Copy Publish Package
+    - name: Copy Required Files used for Publishing Packages
       run: |
         cd dist/publish
         ls -la
-        npx changeset status
-
-    # # Copy all the required files to perform changeset publish.
-    # - name: Copy Required Files used for Publishing Packages
-    #   run: cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
+        nx changeset status
 
     # # Upload /dist directory to be reused by publish Job.
     # - name: Upload /dist Directory
