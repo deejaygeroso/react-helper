@@ -10,7 +10,7 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/publish/packages/eslint-config-airbnb",
+        "outputPath": "dist/packages/eslint-config-airbnb",
         "main": "packages/config/eslint-config-airbnb/src/index.js",
         "tsConfig": "packages/config/eslint-config-airbnb/tsconfig.lib.json",
         "assets": []

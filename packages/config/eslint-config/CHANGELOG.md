@@ -1,5 +1,11 @@
 # @react-helper/eslint-config
 
+## 1.2.2
+
+### Patch Changes
+
+- Minor Patch
+
 ## 1.2.1
 
 ### Patch Changes
