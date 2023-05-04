@@ -43,9 +43,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
     - name: Check Changeset
-      if: steps.changesets.outputs.hasChangesets == 'false'
+      if: steps.changesets.outputs.hasChangesets == 'true'
       # You can do something when a publish should happen.
-      run: echo "Has Changeset"
+      run: echo "Has Changeset" && exit 1
 
     - name: Check Changeset
       if: steps.changesets.outputs.hasChangesets == 'false'
