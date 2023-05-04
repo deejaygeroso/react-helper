@@ -83,6 +83,9 @@ jobs:
     - name: List all packages
       run: ls -la dist/packages
 
+    - name: Check UI package.json
+      run: ls -la dist/packages/ui/package.json
+
     # - name: Publish packages
     #   env:
     #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
