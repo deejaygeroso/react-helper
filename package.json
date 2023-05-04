@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "ci:publish": "pnpm publish -r",
     "ui:build:storybook": "nx run ui:build-storybook",
     "ui:build:prod": "nx run ui:build:production",
     "ui:run": "nx run ui:storybook",
@@ -10,7 +11,9 @@
     "eslint-config:build": "nx run eslint-config:build",
     "eslint-config-airbnb:build": "nx run eslint-config-airbnb:build",
     "prettier-config:build": "nx run prettier-config:build",
-    "affected:build": "nx affected:build --base=origin/release",
+    "affected:build": "nx affected:build --base=origin/main",
+    "affected:graph": "nx affected:graph --base=origin/main",
+    "affected:publish": "nx affected:publish:production --base=origin/main",
     "run:all:lint": "nx run-many --targets=lint --all",
     "run:all:test": "nx run-many -t test",
     "run:all:build": "nx run-many --targets=build --all",
