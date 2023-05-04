@@ -42,9 +42,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-    - name: Check UI package.json
-      run: cat packages/ui/package.json
-
+    # If project does not have changesets, then for now app will fail.
     - name: Check Changeset
       if: steps.changesets.outputs.hasChangesets == 'false'
       run: exit 1
@@ -53,8 +51,12 @@ jobs:
     - name: NX Build Affected Packages
       run: pnpm affected:build
 
-    # Upload dist directory to be reused by publish job.
-    - name: Upload artifact
+    # Copy all the required files to perform changeset publish.
+    - name: Copy Required Files to /dist Directory
+      run: cp -r .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .changeset dist/publish
+
+    # Upload /dist directory to be reused by publish Job.
+    - name: Upload /dist Directory
       uses: actions/upload-artifact@v3
       with:
         name: dist
@@ -70,8 +72,8 @@ jobs:
         node-version: '18.16.0'
         registry-url: 'https://registry.npmjs.org'
 
-    # Download dist directory generated from build job.
-    - name: Download artifact
+    # Download /dist directory from test-and-build Job.
+    - name: Download /dist Directory
       uses: actions/download-artifact@v3
       with:
         name: dist
@@ -80,10 +82,7 @@ jobs:
     - name: Install pNPM
       run: npm install -g pnpm
 
-    - name: List all packages
-      run: ls -la dist/packages
-
-    - name: Check UI package.json
-      run: cat dist/packages/ui/package.json
+    - name: List Publish Files
+      run: ls -la dist/publish
 
 
