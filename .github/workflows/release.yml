@@ -41,34 +41,26 @@ jobs:
       if: steps.changesets.outputs.hasChangesets == 'false'
       run: exit 1
 
-    # # Update Version of Packages based on Configured Changeset Version
-    # - name: Changeset Version
-    #   run: npx changeset version
-
-    # TODO: Testing Only
-    - name: Create Release Pull Request or Publish to npm
-      id: changesets
-      uses: changesets/action@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # Update Version of Packages based on Configured Changeset Version
+    - name: Changeset Version
+      run: npx changeset version
 
     # Build Only the Packages that has changes detected or has its version updated.
     - name: NX Build Affected Packages
       run: pnpm affected:build
 
-
-    # - name: Commit Changesets Update
-    #   run: |
-    #     git config --local user.email "deejaygeroso@gmail.com"
-    #     git config --local user.name "Deejay Geroso [BOT]"
-    #     git add .
-    #     git commit -m "Update: Changeset Version Applied"
+    - name: Commit Changesets Update
+      run: |
+        git config --local user.email "deejaygeroso@gmail.com"
+        git config --local user.name "Deejay Geroso [BOT]"
+        git add .
+        git commit -m "Update: Changeset Version Applied"
     
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     branch: main
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
 
     # Upload dist directory to be reused by publish job.
     - name: Upload dist Directory
