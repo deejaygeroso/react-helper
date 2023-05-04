@@ -82,7 +82,14 @@ jobs:
     - name: Install pNPM
       run: npm install -g pnpm
 
-    - name: List Publish Files
-      run: ls -la dist/publish
+    - name: Go To Publish Directory
+      run: cd dist/publish
 
+    - name: Go To Publish Directory
+      run: cd dist/publish
+
+    - name: Publish Packages
+      run: npx changeset publish
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
