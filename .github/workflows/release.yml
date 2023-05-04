@@ -51,6 +51,9 @@ jobs:
     # Build Only the Packages that has changes detected or has its version updated.
     - name: NX Build Affected Packages
       run: pnpm affected:build
+    
+    - name: Modify Workspace File
+      run: sed -e "s|'packages\/|'dist/publish/packages|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
 
     # Copy all the required files to perform changeset publish.
     - name: Copy Required Files used for Publishing Packages
