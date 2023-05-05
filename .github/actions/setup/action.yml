@@ -21,13 +21,13 @@ runs:
         version: 7
         run_install: false
 
-    - name: Get pNPM Store Directory
-      id: pnpm-cache
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+    # - name: Get pNPM Store Directory
+    #   id: pnpm-cache
+    #   shell: bash
+    #   run: |
+    #     echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+    #   env:
+    #     NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     # - name: Setup pNPM Cache
     #   uses: actions/cache@v3
