@@ -52,12 +52,12 @@ jobs:
     - name: Create A New File
       run: touch delete-this.txt
 
-    - name: Commit Changesets Update
-      run: |
-        git config --local user.email "deejaygeroso@gmail.com"
-        git config --local user.name "Deejay Geroso [BOT]"
-        git add .
-        git commit -m "Update: Changeset Version Applied"
+    # - name: Commit Changesets Update
+    #   run: |
+    #     git config --local user.email "deejaygeroso@gmail.com"
+    #     git config --local user.name "Deejay Geroso [BOT]"
+    #     git add .
+    #     git commit -m "Update: Changeset Version Applied"
 
     # - name: Push changes
     #   uses: ad-m/github-push-action@master
