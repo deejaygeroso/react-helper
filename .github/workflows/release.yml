@@ -23,6 +23,29 @@ jobs:
       with:
         fetch-depth: 2
 
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.16.0'
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
+    # ===============================================================
     # - name: Set up Node.js
     #   uses: actions/setup-node@v3
     #   with:
@@ -50,9 +73,6 @@ jobs:
     # - name: NX Build Affected Packages
     #   run: pnpm affected:build
 
-    - name: Create A New File
-      run: touch delete-this.txt
-
     # - name: Commit Changesets Update
     #   run: |
     #     git config --local user.email "deejaygeroso@gmail.com"
@@ -72,32 +92,36 @@ jobs:
     #   with:
     #     name: dist
     #     path: dist
+    # ===============================================================
 
-    - name: Merge back to main
-      uses: peter-evans/create-pull-request@v5
-      with:
-        commit-message: update changelog
-        title: Update Changelog
-        body: Update changelog to reflect release changes
-        branch: release
-        base: main
-        token: ${{ secrets.GITHUB_TOKEN }}
-        delete-branch: true
+    # ===============================================================
+    # - name: Merge back to main
+    #   uses: peter-evans/create-pull-request@v5
+    #   with:
+    #     commit-message: update changelog
+    #     title: Update Changelog
+    #     body: Update changelog to reflect release changes
+    #     branch: release
+    #     base: main
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     delete-branch: true
 
-    - name: Check Branch Name
-      run: git checkout release
+    # - name: Check Branch Name
+    #   run: git checkout release
 
-    - name: Merge Release branch
-      run: gh pr merge --merge --auto release
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Merge Release branch
+    #   run: gh pr merge --merge --auto release
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # - name: Approve Pull Request
     #   uses: juliangruber/approve-pull-request-action@v2.0.0
     #   with:
     #     github-token: ${{ secrets.GITHUB_TOKEN }}
     #     number: 1
+    # ===============================================================
 
+  # =================================================================
   # publish:
   #   runs-on: ubuntu-latest
   #   needs: build
@@ -132,3 +156,4 @@ jobs:
   #     run: npx changeset publish
   #     env:
   #       NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+  # =================================================================
