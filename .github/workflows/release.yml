@@ -85,7 +85,14 @@ jobs:
         delete-branch: false
 
     - name: Check Branch Name
-      run: git branch
+      run: git checkout release
+
+    - name: Merge Pull Request
+      uses: juliangruber/merge-pull-request-action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: 1
+        method: squash # merge rebase
     
     # - name: Approve Pull Request
     #   uses: juliangruber/approve-pull-request-action@v2.0.0
