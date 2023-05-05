@@ -1,6 +1,11 @@
 name: 'Setup'
 description: 'Setup and Install Dependencies'
 
+inputs:
+  NPM_AUTH_TOKEN:
+    required: true
+    default: ${{ secrets.NPM_AUTH_TOKEN }}
+
 runs:
   using: 'composite'
   steps:
@@ -27,7 +32,7 @@ runs:
       run: |
         echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
       env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        NPM_AUTH_TOKEN: ${{ inputs.NPM_AUTH_TOKEN }}
 
     # - name: Echo Store Path
     #   run: echo $GITHUB_OUTPUT
