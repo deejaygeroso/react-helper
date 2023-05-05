@@ -25,6 +25,8 @@ jobs:
 
     - name: Setup
       uses: ./.github/actions/setup
+      with:
+        NPM_AUTH_TOKEN: ${{ inputs.NPM_AUTH_TOKEN }}
 
 
     # ===============================================================

@@ -1,11 +1,6 @@
 name: 'Setup'
 description: 'Setup and Install Dependencies'
 
-inputs:
-  NPM_AUTH_TOKEN:
-    required: true
-    default: ${{ secrets.NPM_AUTH_TOKEN }}
-
 runs:
   using: 'composite'
   steps:
