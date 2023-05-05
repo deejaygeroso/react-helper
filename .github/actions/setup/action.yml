@@ -29,19 +29,19 @@ runs:
       env:
         NPM_AUTH_TOKEN: ${{ inputs.NPM_AUTH_TOKEN }}
 
-    # - name: Echo Store Path
-    #   run: echo $GITHUB_OUTPUT
+    - name: Echo Store Path
+      run: echo $GITHUB_OUTPUT
 
-    # - name: Echo STEPS
-    #   run: echo $steps.pnpm-cache.outputs.STORE_PATH 
+    - name: Echo STEPS
+      run: echo $steps.pnpm-cache.outputs.STORE_PATH 
 
-    # - name: Setup pNPM Cache
-    #   uses: actions/cache@v3
-    #   with:
-    #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-    #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-pnpm-store-
+    - name: Setup pNPM Cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
 
-    # - name: Install dependencies
-    #   run: pnpm install --frozen-lockfile
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
