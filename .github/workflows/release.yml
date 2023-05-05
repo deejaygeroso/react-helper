@@ -71,7 +71,7 @@ jobs:
         fetch-depth: 2
         
     - name: Restore pNPM cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
         key: ${{ runner.job_id }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
