@@ -74,14 +74,17 @@ jobs:
         path: dist
 
     - name: Merge back to main
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v5
       with:
         title: Merge changes from release to main
         body: |
           This pull request merges the changes from the release to the main branch.
-        branch: main
+        branch: release
+        base: main
         commit-message: |
           Update: Merge changes from release to main
+        token: ${{ secrets.GITHUB_TOKEN }}
+        delete-branch: true
 
   publish:
     runs-on: ubuntu-latest
