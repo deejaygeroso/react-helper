@@ -45,6 +45,10 @@ jobs:
     - name: Changeset Version
       run: npx changeset version
 
+    - name: Create Release branch
+      run: |
+        git checkout -b release
+
     # Build Only the Packages that has changes detected or has its version updated.
     - name: NX Build Affected Packages
       run: pnpm affected:build
@@ -55,12 +59,12 @@ jobs:
         git config --local user.name "Deejay Geroso [BOT]"
         git add .
         git commit -m "Update: Changeset Version Applied"
-    
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
+
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: main
 
     # Upload dist directory to be reused by publish job.
     - name: Upload dist Directory
@@ -68,6 +72,16 @@ jobs:
       with:
         name: dist
         path: dist
+
+    - name: Merge back to main
+      uses: peter-evans/create-pull-request@v3
+      with:
+        title: Merge changes from release to main
+        body: |
+          This pull request merges the changes from the release to the main branch.
+        branch: main
+        commit-message: |
+          Update: Merge changes from release to main
 
   publish:
     runs-on: ubuntu-latest
