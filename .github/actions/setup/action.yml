@@ -41,5 +41,6 @@ runs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
-    # - name: Install dependencies
-    #   run: pnpm install --frozen-lockfile
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
