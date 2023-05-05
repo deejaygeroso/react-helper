@@ -23,43 +23,9 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.16.0'
+    - name: Setup
+      uses: ./.github/actions/setup
 
-    - uses: pnpm/action-setup@v2
-      name: Install pnpm
-      id: pnpm-install
-      with:
-        version: 7
-        run_install: false
-
-    - name: Get pNPM Store Directory
-      id: pnpm-cache
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-      env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
-    - name: Echo Store Path
-      run: echo $GITHUB_OUTPUT
-
-    - name: Echo STEPS
-      run: echo $steps.pnpm-cache.outputs.STORE_PATH 
-
-    - name: Setup pNPM Cache
-      uses: actions/cache@v3
-      with:
-        # path: ~/.pnpm-store
-        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
-
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
 
     # ===============================================================
     # - name: Set up Node.js

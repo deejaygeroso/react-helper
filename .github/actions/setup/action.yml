@@ -1,5 +1,5 @@
 name: 'Setup'
-description: 'Install Dependencies'
+description: 'Setup and Install Dependencies'
 
 runs:
   using: 'composite'
@@ -9,45 +9,39 @@ runs:
       with:
         fetch-depth: 2
 
-    - name: Setup Node.js
+    - name: Install Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.16.0'
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      id: pnpm-install
       with:
-        node-version: '18.16.0'
+        version: 7
+        run_install: false
 
-    - name: Install pNPM
-      run: npm install -g pnpm
+    - name: Get pNPM Store Directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-    - name: Install Dependencies
+    - name: Echo Store Path
+      run: echo $GITHUB_OUTPUT
+
+    - name: Echo STEPS
+      run: echo $steps.pnpm-cache.outputs.STORE_PATH 
+
+    - name: Setup pNPM Cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
       run: pnpm install --frozen-lockfile
-
-    # - name: Install pnpm
-    #   uses: pnpm/action-setup@v2
-    #   id: pnpm-install
-    #   with:
-    #     version: 8
-    #     run_install: false
-
-    # - name: Install Dependencies
-    #   run: pnpm install --frozen-lockfile
-
-    # - name: Get pnpm store directory
-    #   id: pnpm-cache
-    #   shell: bash
-    #   run: |
-    #     echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-    # - name: Setup pnpm cache
-    #   uses: actions/cache@v3
-    #   with:
-    #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-    #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-pnpm-store-
-
-    # - name: Install Dependencies
-    #   run: pnpm install --frozen-lockfile
