@@ -89,6 +89,8 @@ jobs:
 
     - name: Merge Release branch
       run: gh pr merge --merge --auto release
+      env:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
     # - name: Approve Pull Request
     #   uses: juliangruber/approve-pull-request-action@v2.0.0
