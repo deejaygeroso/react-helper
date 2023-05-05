@@ -37,8 +37,8 @@ jobs:
     - name: Echo Store Path
       run: echo $GITHUB_OUTPUT
 
-    - name: Echo Store Path
-      run: echo $STORE_PATH
+    - name: Echo STEPS
+      run: echo $steps.pnpm-cache.outputs.STORE_PATH 
 
     # - name: Setup pNPM Cache
     #   uses: actions/cache@v3
