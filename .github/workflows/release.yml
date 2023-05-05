@@ -79,10 +79,19 @@ jobs:
         commit-message: update changelog
         title: Update Changelog
         body: Update changelog to reflect release changes
-        branch: update-changelog
+        branch: release
         base: main
         token: ${{ secrets.GITHUB_TOKEN }}
         delete-branch: false
+
+    - name: Check Branch Name
+      run: git branch
+    
+    # - name: Approve Pull Request
+    #   uses: juliangruber/approve-pull-request-action@v2.0.0
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }}
+    #     number: 1
 
   # publish:
   #   runs-on: ubuntu-latest
