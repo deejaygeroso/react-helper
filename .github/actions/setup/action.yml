@@ -27,7 +27,7 @@ runs:
       run: |
         echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
       env:
-        NPM_AUTH_TOKEN: ${{ inputs.NPM_AUTH_TOKEN }}
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     - name: Setup pNPM Cache
       uses: actions/cache@v3
@@ -37,5 +37,5 @@ runs:
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
-    # - name: Install dependencies
-    #   run: pnpm install --frozen-lockfile
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
