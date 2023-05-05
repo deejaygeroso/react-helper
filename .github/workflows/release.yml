@@ -23,10 +23,10 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.16.0'
+    # - name: Set up Node.js
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: '18.16.0'
 
     # - name: Install pNPM
     #   run: npm install -g pnpm
