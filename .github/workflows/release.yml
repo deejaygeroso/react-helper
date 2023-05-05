@@ -88,7 +88,7 @@ jobs:
       run: git checkout release
 
     - name: Merge Release branch
-      run: git merge --squash release
+      run: gh pr merge --merge --auto release
 
     # - name: Approve Pull Request
     #   uses: juliangruber/approve-pull-request-action@v2.0.0
