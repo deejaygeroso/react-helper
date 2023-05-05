@@ -18,12 +18,15 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
     - name: Setup
       uses: ./.github/actions/setup
       with:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-    - name: List
-      run: ls -la
 
     # # If project does not have changesets, then for now app will fail.
     # - name: Check Changeset
