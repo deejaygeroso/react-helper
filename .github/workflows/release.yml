@@ -82,17 +82,14 @@ jobs:
         branch: release
         base: main
         token: ${{ secrets.GITHUB_TOKEN }}
-        delete-branch: false
+        delete-branch: true
 
     - name: Check Branch Name
       run: git checkout release
 
-    - name: Merge Pull Request
-      uses: juliangruber/merge-pull-request-action@v1
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        method: squash # merge rebase
-    
+    - name: Merge Release branch
+      run: git merge --squash release
+
     # - name: Approve Pull Request
     #   uses: juliangruber/approve-pull-request-action@v2.0.0
     #   with:
