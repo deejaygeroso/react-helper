@@ -1,9 +1,10 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - changeset-release/main
+    types: [closed]
 
 permissions:
   id-token: write
@@ -11,8 +12,7 @@ permissions:
 
 jobs:
   release:
-    # if: github.ref == 'refs/heads/changeset-release/main'
-    if: contains(github.ref, 'refs/heads/changeset-release/')
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
