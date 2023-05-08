@@ -24,4 +24,5 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: echo Hello World
+    - name: Test
+      run: echo Release The Kraken
