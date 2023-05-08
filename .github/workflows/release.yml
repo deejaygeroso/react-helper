@@ -25,5 +25,19 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Test
-      run: echo ${{ github.head_ref }}
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    # Build Only the Packages that has changes detected or has its version updated.
+    - name: NX Build Affected Packages
+      run: pnpm affected:build
+
+    - name: Modify Workspace File
+      run: sed -e "s|'packages\/|'dist/packages/|" pnpm-workspace.yaml > pnpm-new.yaml && mv pnpm-new.yaml pnpm-workspace.yaml
+
+    - name: Publish
+      run: npx changeset publish
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
