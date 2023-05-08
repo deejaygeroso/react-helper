@@ -1,4 +1,4 @@
-name: Changeset Versioning
+name: Release
 
 on:
   push:
@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   release:
-    if: github.ref == 'refs/heads/changeset-release/main'
+    # if: github.ref == 'refs/heads/changeset-release/main'
+    if: contains(github.ref, 'refs/heads/changeset-release/')
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
