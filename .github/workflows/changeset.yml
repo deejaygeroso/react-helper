@@ -23,6 +23,11 @@ jobs:
       with:
         fetch-depth: 2
 
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
     - name: Create Release Pull Request
       id: changesets
       uses: changesets/action@v1
