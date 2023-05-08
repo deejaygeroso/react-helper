@@ -13,7 +13,7 @@ permissions:
 jobs:
   release:
     # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
-    # if: github.event.pull_request.base.ref == 'changeset-release/main'
+    if: github.head_ref == 'changeset-release/main'
     runs-on: ubuntu-latest
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the
