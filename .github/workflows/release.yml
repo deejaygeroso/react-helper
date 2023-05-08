@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - changeset-release/main
-    types: [closed]
+    # types: [closed]
 
 permissions:
   id-token: write
