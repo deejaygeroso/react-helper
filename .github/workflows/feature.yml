@@ -21,6 +21,9 @@ jobs:
       uses: ./.github/actions/setup
       with:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    - name: Fetch Origin Main
+      run: git fetch origin main
     
     - name: Run Lint on All Affected Code
       run: pnpm affected:lint
