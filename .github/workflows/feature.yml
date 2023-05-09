@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - feature/**
+  pull_request:
+    branches:
+      - master
+    types: [open]
 
 permissions:
   id-token: write
