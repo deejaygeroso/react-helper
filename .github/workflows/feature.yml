@@ -1,0 +1,30 @@
+name: Feature Pipeline
+on:
+  push:
+    branches:
+      - feature/**
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+    
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        GITHUB_TOKEN: ${{ secrets.DEVOPS_GITHUB_TOKEN }}
+    
+    - name: Run Lint on All Affected Code
+      run: pnpm affected:lint
+
+    - name: Run Tests on All Affected Code
+      run: pnpm affected:test
+
