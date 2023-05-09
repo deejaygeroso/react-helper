@@ -14,7 +14,7 @@ permissions:
 jobs:
   test-pr:
     # if: github.event.pull_request.merged == true && github.head_ref == 'feature/*'
-    if: github.head_ref == feature/*
+    if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     permissions:
       contents: write
