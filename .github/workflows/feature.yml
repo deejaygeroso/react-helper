@@ -24,6 +24,8 @@ jobs:
     
     - name: Run Lint on All Affected Code
       run: pnpm affected:lint
+      with:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     - name: Run Tests on All Affected Code
       run: pnpm affected:test
