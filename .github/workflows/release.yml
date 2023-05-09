@@ -25,6 +25,14 @@ jobs:
       with:
         fetch-depth: 2
 
+    - name: Check if head_ref starts with "feature/"
+    run: |
+      if [[ "${{ github.head_ref }}" == feature/* ]]; then
+        echo "Head ref starts with 'feature/'"
+      else
+        echo "Head ref does not start with 'feature/'"
+      fi
+
   # setup-changeset:
   #   if: github.event.pull_request.merged == true && github.head_ref != 'changeset-release/main'
   #   runs-on: ubuntu-latest
