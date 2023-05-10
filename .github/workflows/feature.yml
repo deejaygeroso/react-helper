@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature/**
+    types: [open]
   pull_request:
     branches:
       - main

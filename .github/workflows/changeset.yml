@@ -1,6 +1,10 @@
 name: Changeset Pipeline
 
 on:
+  push:
+    branches:
+      - feature/**
+    types: [closed]
   pull_request:
     branches:
       - main
