@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - changeset-release/main
-    types: [closed]
   pull_request:
     branches:
       - main
