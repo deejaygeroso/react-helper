@@ -1,0 +1,36 @@
+name: Feature Pipeline
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize]
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+    
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    - name: Fetch Origin Main
+      run: git fetch origin main
+    
+    - name: Run Lint on All Affected Code
+      run: pnpm affected:lint
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+    - name: Run Tests on All Affected Code
+      run: pnpm affected:test
+
