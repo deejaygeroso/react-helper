@@ -1,12 +1,12 @@
 name: Feature Pipeline
 on:
-  push:
-    branches:
-      - feature/**
   pull_request:
     branches:
       - main
     types: [opened, synchronize]
+    # Only trigger if the branch name starts with "feature"
+    paths:
+      - 'refs/pull/*/head'
 
 permissions:
   id-token: write

@@ -1,13 +1,13 @@
 name: Changeset Pipeline
-# 
+
 on:
-  push:
-    branches:
-      - feature/**
   pull_request:
     branches:
       - main
     types: [closed]
+    # Only trigger if the branch name starts with "feature"
+    paths:
+      - 'refs/pull/*/head'
 
 permissions:
   id-token: write
