@@ -5,7 +5,7 @@ on:
       - feature/**
   pull_request:
     branches:
-      - master
+      - main
     types: [open]
 
 permissions:
