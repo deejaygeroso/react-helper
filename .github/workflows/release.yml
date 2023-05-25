@@ -45,29 +45,29 @@ jobs:
 
     - name: Log Tags & Version
       run: |
-        echo steps.lib-version.outputs.VERSION
-        echo steps.lib-version.outputs.TAG_EXISTS
+        echo {{ steps.lib-version.outputs.VERSION }}
+        echo {{ steps.lib-version.outputs.TAG_EXISTS }}
 
 
     - name: -z
       run: |
         if [ -z steps.lib-version.outputs.VERSION ]; then
-          echo "Version tag '${VERSION}' does not exist"
+          echo "Version tag '${steps.lib-version.outputs.VERSION}' does not exist"
           echo "::set-output name=tag_exists::false"
         else
           echo "Version tag '${VERSION}' exists"
           echo "::set-output name=tag_exists::true"
         fi
 
-    - name: Release Tag
-      uses: softprops/action-gh-release@v1
-      with:
-        body: |
-          ## CHANGELOG
-          Release Version v${{ steps.lib-version.outputs.VERSION }}
-        tag_name: v${{ steps.lib-version.outputs.VERSION }}
-        draft: false
-        prerelease: false
-        token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Release Tag
+    #   uses: softprops/action-gh-release@v1
+    #   with:
+    #     body: |
+    #       ## CHANGELOG
+    #       Release Version v${{ steps.lib-version.outputs.VERSION }}
+    #     tag_name: v${{ steps.lib-version.outputs.VERSION }}
+    #     draft: false
+    #     prerelease: false
+    #     token: ${{ secrets.GITHUB_TOKEN }}
 
         
