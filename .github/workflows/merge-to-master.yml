@@ -1,4 +1,4 @@
-name: Release Pipeline
+name: Merge To Master
 
 on:
   push:
@@ -27,7 +27,12 @@ jobs:
       with:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-    - name: Publish Packages
-      run: echo "Publish"
-
+    - name: Create Release Pull Request
+      id: changesets
+      uses: changesets/action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      with:
+        publish: ./.github/workflows/release
         
