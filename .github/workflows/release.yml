@@ -34,6 +34,18 @@ jobs:
       id: lib-version
       run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
+    - name: Get tags
+      id: tags
+      run: |
+        echo "TAGS=$(git tag --sort=-v:refname)" >> $GITHUB_OUTPUT
+
+    - name: Check if version exists
+      run: |
+        if echo "${{ steps.tags.outputs.tags }}" | grep -q "\b${{ steps.lib-version.outputs.VERSION }}\b"; then
+          echo "Version ${{ env.VERSION }} already exists."
+          exit 1
+        fi
+
     - name: Release Tag
       uses: softprops/action-gh-release@v1
       with:
