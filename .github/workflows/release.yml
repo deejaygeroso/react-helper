@@ -1,11 +1,9 @@
 name: Release Pipeline
 
 on:
-  workflow_run:
-    workflows:
-      - Merge To Master
-    types:
-      - completed
+  push:
+    branches: 
+    - main
 
 permissions:
   id-token: write
@@ -31,5 +29,20 @@ jobs:
 
     - name: Publish Packages
       run: echo "Publish"
+
+    - name: Set Version Tag
+      id: lib-version
+      run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+    - name: Release Tag
+      uses: softprops/action-gh-release@v1
+      with:
+        body: |
+          ## CHANGELOG
+          Release Version v${{ steps.lib-version.outputs.VERSION }}
+        tag_name: v${{ steps.lib-version.outputs.VERSION }}
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
 
         
