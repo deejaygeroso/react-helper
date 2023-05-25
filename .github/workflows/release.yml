@@ -41,9 +41,22 @@ jobs:
 
     - name: Check if version exists
       run: |
-        if echo "${{ steps.tags.outputs.tags }}" | grep -q "\b${{ steps.lib-version.outputs.VERSION }}\b"; then
-          echo "Version ${{ env.VERSION }} already exists."
-          exit 1
+        echo TAG_EXISTS=$(git ls-remote --tags origin "refs/tags/${VERSION}") >> $GITHUB_OUTPUT
+
+    - name: Log Tags & Version
+      run: |
+        echo steps.lib-version.outputs.VERSION
+        echo steps.lib-version.outputs.TAG_EXISTS
+
+
+    - name: -z
+      run: |
+        if [ -z steps.lib-version.outputs.VERSION ]; then
+          echo "Version tag '${VERSION}' does not exist"
+          echo "::set-output name=tag_exists::false"
+        else
+          echo "Version tag '${VERSION}' exists"
+          echo "::set-output name=tag_exists::true"
         fi
 
     - name: Release Tag
