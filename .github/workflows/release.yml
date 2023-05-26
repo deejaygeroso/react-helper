@@ -55,7 +55,7 @@ jobs:
         fi
 
     - name: Release Tag
-      if: -z ${{ steps.tag.outputs.TAG_EXISTS }}
+      if: [ -z ${{ steps.tag.outputs.TAG_EXISTS }} ]
       uses: softprops/action-gh-release@v1
       with:
         body: |
