@@ -34,46 +34,21 @@ jobs:
       id: lib-version
       run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-    # - name: Get tags
-    #   id: tags
-    #   run: |
-    #     echo "TAGS=$(git tag --sort=-v:refname)" >> $GITHUB_OUTPUT
-
-    - name: ECHO
-      run: |
-        echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})"
-
-    - name: Check if version exists
+    - name: Set Flag if Tag Exist
       id: tag
       run: |
         echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})" >> $GITHUB_OUTPUT
 
-    - name: Log Tags & Version
-      run: |
-        echo VERSION: ${{ steps.lib-version.outputs.VERSION }}
-        echo TAG EXIST 1: ${{ steps.tag.outputs.TAG_EXISTS }}
-
-
-    - name: -z
-      run: |
-        if [ -z ${{ steps.tag.outputs.TAG_EXISTS }} ]; then
-          echo "Version tag 'v${{ steps.lib-version.outputs.VERSION }}' does not exist"
-          echo "::set-output name=tag_exists::false"
-        else
-          echo "Version tag 'v${{ steps.lib-version.outputs.VERSION }}' exists"
-          echo "::set-output name=tag_exists::true"
-        fi
-
-    # - name: Release Tag
-    #   if: -z ${{ steps.lib-version.outputs.TAG_EXISTS }}
-    #   uses: softprops/action-gh-release@v1
-    #   with:
-    #     body: |
-    #       ## CHANGELOG
-    #       Release Version v${{ steps.lib-version.outputs.VERSION }}
-    #     tag_name: v${{ steps.lib-version.outputs.VERSION }}
-    #     draft: false
-    #     prerelease: false
-    #     token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release Tag
+      if: -z ${{ steps.tag.outputs.TAG_EXISTS }}
+      uses: softprops/action-gh-release@v1
+      with:
+        body: |
+          ## CHANGELOG
+          Release Version v${{ steps.lib-version.outputs.VERSION }}
+        tag_name: v${{ steps.lib-version.outputs.VERSION }}
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
 
         
