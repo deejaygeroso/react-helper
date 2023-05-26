@@ -45,17 +45,17 @@ jobs:
 
     - name: Log Tags & Version
       run: |
-        echo {{ steps.lib-version.outputs.VERSION }}
-        echo {{ steps.lib-version.outputs.TAG_EXISTS }}
+        echo ${{ steps.lib-version.outputs.VERSION }}
+        echo ${{ steps.lib-version.outputs.TAG_EXISTS }}
 
 
     - name: -z
       run: |
-        if [ -z steps.lib-version.outputs.VERSION ]; then
-          echo "Version tag '${steps.lib-version.outputs.VERSION}' does not exist"
+        if [ -z ${{ steps.lib-version.outputs.VERSION }} ]; then
+          echo "Version tag '${{ steps.lib-version.outputs.VERSION }}' does not exist"
           echo "::set-output name=tag_exists::false"
         else
-          echo "Version tag '${VERSION}' exists"
+          echo "Version tag '${{ steps.lib-version.outputs.VERSION }}' exists"
           echo "::set-output name=tag_exists::true"
         fi
 
