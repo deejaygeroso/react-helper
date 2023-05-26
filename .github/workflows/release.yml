@@ -39,6 +39,10 @@ jobs:
       run: |
         echo "TAGS=$(git tag --sort=-v:refname)" >> $GITHUB_OUTPUT
 
+    - name: ECHO
+      run: |
+        echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})"
+
     - name: Check if version exists
       run: |
         echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})" >> $GITHUB_OUTPUT
