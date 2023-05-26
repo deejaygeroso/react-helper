@@ -43,8 +43,16 @@ jobs:
       run: |
         echo VERSION: ${{ steps.lib-version.outputs.VERSION }}
         echo TAG EXIST: ${{ steps.tag.outputs.TAG_EXISTS }}
-        echo -Z: z ${{ steps.tag.outputs.TAG_EXISTS }}
 
+    - name: -z
+      run: |
+        if [ -z ${{ steps.tag.outputs.TAG_EXISTS }} ]; then
+          echo "Version tag 'v${{ steps.lib-version.outputs.VERSION }}' does not exist"
+          echo "::set-output name=tag_exists::false"
+        else
+          echo "Version tag 'v${{ steps.lib-version.outputs.VERSION }}' exists"
+          echo "::set-output name=tag_exists::true"
+        fi
 
     - name: Release Tag
       if: -z ${{ steps.tag.outputs.TAG_EXISTS }}
