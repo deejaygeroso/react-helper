@@ -41,7 +41,7 @@ jobs:
 
     - name: Check if version exists
       run: |
-        echo TAG_EXISTS=$(git ls-remote --tags origin "refs/tags/${{ steps.lib-version.outputs.VERSION }}") >> $GITHUB_OUTPUT
+        echo TAG_EXISTS=$(git ls-remote --tags origin "refs/tags/v${{ steps.lib-version.outputs.VERSION }}") >> $GITHUB_OUTPUT
 
     - name: Log Tags & Version
       run: |
@@ -60,6 +60,7 @@ jobs:
         fi
 
     # - name: Release Tag
+    #   if: -z ${{ steps.lib-version.outputs.TAG_EXISTS }}
     #   uses: softprops/action-gh-release@v1
     #   with:
     #     body: |
