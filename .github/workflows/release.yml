@@ -41,14 +41,17 @@ jobs:
 
     - name: Check if version exists
       run: |
-        TAG_EXISTS=$(git ls-remote --tags origin "refs/tags/v${{ steps.lib-version.outputs.VERSION }}")
-        echo TAG EXIST: ${{ TAG_EXISTS }}
-        echo  ${{ TAG_EXISTS }} >> TAG_EXISTS
+        echo "TAG_EXISTS=$(git ls-remote --tags origin "refs/tags/v${{ steps.lib-version.outputs.VERSION }}")" >> $GITHUB_OUTPUT
+
+    - name: Check if version exists
+      run: |
+        echo "TAG_EXISTS_2=$(git ls-remote --tags origin "refs/tags/v0.1.0")" >> $GITHUB_OUTPUT
 
     - name: Log Tags & Version
       run: |
         echo VERSION: ${{ steps.lib-version.outputs.VERSION }}
-        echo TAG EXIST: ${{ steps.lib-version.outputs.TAG_EXISTS }}
+        echo TAG EXIST 1: ${{ steps.lib-version.outputs.TAG_EXISTS }}
+        echo TAG EXIST 2: ${{ steps.lib-version.outputs.TAG_EXISTS_2 }}
 
 
     - name: -z
