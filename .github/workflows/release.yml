@@ -34,33 +34,29 @@ jobs:
       id: lib-version
       run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-    - name: Get tags
-      id: tags
-      run: |
-        echo "TAGS=$(git tag --sort=-v:refname)" >> $GITHUB_OUTPUT
+    # - name: Get tags
+    #   id: tags
+    #   run: |
+    #     echo "TAGS=$(git tag --sort=-v:refname)" >> $GITHUB_OUTPUT
 
     - name: ECHO
       run: |
         echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})"
 
     - name: Check if version exists
+      id: tag
       run: |
         echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})" >> $GITHUB_OUTPUT
-
-    - name: Check if version exists
-      run: |
-        echo "TAG_EXISTS_2=$(git ls-remote --tags origin refs/tags/v0.1.0)" >> $GITHUB_OUTPUT
 
     - name: Log Tags & Version
       run: |
         echo VERSION: ${{ steps.lib-version.outputs.VERSION }}
-        echo TAG EXIST 1: ${{ steps.lib-version.outputs.TAG_EXISTS }}
-        echo TAG EXIST 2: ${{ steps.lib-version.outputs.TAG_EXISTS_2 }}
+        echo TAG EXIST 1: ${{ steps.tag.outputs.TAG_EXISTS }}
 
 
     - name: -z
       run: |
-        if [ -z ${{ steps.lib-version.outputs.TAG_EXISTS }} ]; then
+        if [ -z ${{ steps.tag.outputs.TAG_EXISTS }} ]; then
           echo "Version tag '${{ steps.lib-version.outputs.VERSION }}' does not exist"
           echo "::set-output name=tag_exists::false"
         else
