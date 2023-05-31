@@ -11,6 +11,29 @@ permissions:
   contents: write
 
 jobs:
+  trivy-scan:
+    name: Trivy Scan
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Vulnerability & Secret scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'sarif'
+          exit-code: '1'
+          ignore-unfixed: false
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          security-checks: 'secret,vuln'
+          vuln-type: 'library'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
   test:
     runs-on: ubuntu-latest
     steps:
