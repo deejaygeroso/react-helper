@@ -11,59 +11,28 @@ permissions:
   packages: write
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+  trivy-scan:
+    name: Trivy Scan
+    runs-on: self-hosted
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Setup
-      uses: ./.github/actions/setup
-      with:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Vulnerability & Secret scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'sarif'
+          exit-code: '1'
+          ignore-unfixed: false
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          security-checks: 'secret,vuln'
+          vuln-type: 'library'
+          output: 'trivy-results.sarif'
 
-    - name: Publish Packages
-      run: echo "Publish"
-
-    - name: Set Version Tag
-      id: lib-version
-      run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-
-    - name: Set Flag if Tag Exist
-      id: tag
-      run: |
-        echo "TAG_EXISTS=$(git ls-remote --tags origin refs/tags/v${{ steps.lib-version.outputs.VERSION }})" >> $GITHUB_OUTPUT
-
-    - name: Log Tags & Version
-      run: |
-        echo VERSION: ${{ steps.lib-version.outputs.VERSION }}
-        echo TAG EXIST: ${{ steps.tag.outputs.TAG_EXISTS }}
-
-    - name: -z
-      run: |
-        if [ -z ${{ steps.tag.outputs.TAG_EXISTS }} ]; then
-          echo "Version tag 'v${{ steps.lib-version.outputs.VERSION }}' does not exist"
-          echo "::set-output name=tag_exists::false"
-        else
-          echo "Version tag 'v${{ steps.lib-version.outputs.VERSION }}' exists"
-          echo "::set-output name=tag_exists::true"
-        fi
-
-    - name: Release Tag
-      if: steps.tag.outputs.TAG_EXISTS == ''
-      uses: softprops/action-gh-release@v1
-      with:
-        body: |
-          ## CHANGELOG
-          Release Version v${{ steps.lib-version.outputs.VERSION }}
-        tag_name: v${{ steps.lib-version.outputs.VERSION }}
-        draft: false
-        prerelease: false
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
 
         
