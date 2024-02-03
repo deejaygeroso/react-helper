@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -28,27 +29,9 @@ jobs:
     - name: Run Tests on All Affected Code
       run: pnpm github-pipeline:affected:test
 
-  trivy-scan:
-    name: Trivy Scan
-    runs-on: self-hosted
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Vulnerability & Secret scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: false
-          severity: 'CRITICAL,HIGH,MEDIUM'
-          scanners: 'secret,vuln'
-          vuln-type: 'library'
-
   lint:
     name: Lint
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -83,7 +66,7 @@ jobs:
 
   test-build:
     name: Test Build
-    runs-on: large-runner
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
@@ -104,3 +87,21 @@ jobs:
 
     - name: NX Build Packages
       run: pnpm github-pipeline:affected:build
+
+  trivy-scan:
+    name: Trivy Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Vulnerability & Secret scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: false
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          scanners: 'secret,vuln'
+          vuln-type: 'library'
