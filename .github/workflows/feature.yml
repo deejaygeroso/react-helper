@@ -26,6 +26,9 @@ jobs:
     - name: Fetch Origin Main
       run: git fetch origin main
     
+    - name: Lint Test
+      run: pnpm github-pipeline:affected:lint
+
     - name: Run Tests on All Affected Code
       run: pnpm github-pipeline:affected:test
 
