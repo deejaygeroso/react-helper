@@ -43,11 +43,12 @@ jobs:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     - name: Fetch Origin Main
-      run: git fetch origin main
+      run: |
+        git fetch origin main || echo "main branch does not exist, skipping fetch"
 
     - name: Check Unformatted Files
       run: |
-        git fetch origin main
+        git fetch origin main || echo "main branch does not exist, skipping fetch"
         pnpm github-pipeline:format:write
         if [[ $(git diff --exit-code) ]]; then
           echo "There are uncommitted changes, stopping pipeline!"
