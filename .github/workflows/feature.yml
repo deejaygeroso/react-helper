@@ -44,7 +44,7 @@ jobs:
 
     - name: Fetch Origin Main
       run: |
-        git git fetch origin main:refs/remotes/origin/main || echo "main branch does not exist, skipping fetch"
+        git fetch origin main:refs/remotes/origin/main || echo "main branch does not exist, skipping fetch"
 
     - name: Check Unformatted Files
       run: |
