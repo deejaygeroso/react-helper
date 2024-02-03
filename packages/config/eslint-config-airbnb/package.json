@@ -16,11 +16,5 @@
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
     "tslib": "^2.5.0",
     "typescript": "^5.0.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "semver": "7.5.2",
-      "word-wrap": "1.2.4"
-    }
   }
 }
