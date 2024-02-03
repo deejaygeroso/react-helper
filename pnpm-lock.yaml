@@ -5,10 +5,10 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@babel/traverse': 7.23.9
-  '@types/semver': 7.5.2
-  semver: 7.5.2
-  word-wrap: 1.2.4
+  '@babel/traverse': ^7.23.9
+  '@types/semver': ^7.5.2
+  semver: ^7.5.2
+  word-wrap: ^1.2.4
 
 importers:
 
@@ -6319,7 +6319,7 @@ packages:
     resolution: {integrity: sha512-mWEvCQTgXQf48yDqgN7CH50waTyYBeP2Lpqx4nNWab9sxEpdXVeKgfj1qYI2/TgUPQtNFZ85i3PemRtnXVYYJg==}
     peerDependencies:
       '@babel/core': ^7
-      '@babel/traverse': 7.23.9
+      '@babel/traverse': ^7.23.9
     peerDependenciesMeta:
       '@babel/traverse':
         optional: true
