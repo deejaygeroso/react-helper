@@ -1,8 +1,7 @@
 name: Feature Pipeline
 on:
   pull_request:
-    branches:
-      - main
+
     types: [opened, synchronize]
 
 permissions:
@@ -26,13 +25,8 @@ jobs:
     - name: Fetch Origin Main
       run: git fetch origin main
     
-    - name: Run Lint on All Affected Code
-      run: pnpm affected:lint
-      env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
     - name: Run Tests on All Affected Code
-      run: pnpm affected:test
+      run: pnpm github-pipeline:affected:test
 
   trivy-scan:
     name: Trivy Scan
@@ -51,3 +45,62 @@ jobs:
           severity: 'CRITICAL,HIGH,MEDIUM'
           scanners: 'secret,vuln'
           vuln-type: 'library'
+
+  lint:
+    name: Lint
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
+    - name: Get Branch Name
+      id: feature_branch
+      run: echo "BRANCH_NAME=feature_branch::${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+    
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        CACHE_KEY:  ${{ steps.feature_branch.outputs.BRANCH_NAME }}
+
+    - name: Fetch Origin Main
+      run: git fetch origin master
+
+    - name: Check Unformatted Files
+      run: |
+        pnpm github-pipeline:format:write
+        if [[ $(git diff --exit-code) ]]; then
+          echo "There are uncommitted changes, stopping pipeline!"
+          exit 1
+        fi
+
+    - name: Run Lint on All Affected Code
+      run: pnpm github-pipeline:affected:lint
+      env:
+        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+  test-build:
+    name: Test Build
+    runs-on: large-runner
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        CACHE_KEY: release-pipeline
+
+    - name: Fetch Origin Main
+      run: git fetch origin main
+
+    - name: NX Build Packages
+      run: pnpm github-pipeline:affected:build

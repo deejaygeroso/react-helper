@@ -25,7 +25,11 @@
     "format:check": "nx format:check",
     "format:write": "nx format:check",
     "graph": "nx graph",
-    "reset": "nx reset"
+    "reset": "nx reset",
+    "github-pipeline:affected:lint": "nx affected:lint  --base=origin/main",
+    "github-pipeline:affected:test": "nx affected:test --base=origin/main",
+    "github-pipeline:affected:build": "nx affected:build --base=origin/main",
+    "github-pipeline:format:write": "nx format:check"
   },
   "private": true,
   "devDependencies": {
