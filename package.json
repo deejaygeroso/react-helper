@@ -23,13 +23,13 @@
     "migrate:init": "nx migrate latest",
     "migrate:exec": "nx migrate --run-migrations",
     "format:check": "nx format:check",
-    "format:write": "nx format:check",
+    "format:write": "nx format:write",
     "graph": "nx graph",
     "reset": "nx reset",
     "github-pipeline:affected:lint": "nx affected:lint --base=origin/main",
     "github-pipeline:affected:test": "nx affected:test --base=origin/main",
     "github-pipeline:affected:build": "nx affected:build --base=origin/main",
-    "github-pipeline:format:write": "nx format:check"
+    "github-pipeline:format:write": "nx format:check --base=origin/main"
   },
   "private": true,
   "devDependencies": {
@@ -95,10 +95,9 @@
     "react-dom": "18.2.0",
     "styled-components": "6.1.8"
   },
-  "pnpm": {
-    "overrides": {
-      "semver": "7.5.2",
-      "word-wrap": "1.2.4"
-    }
+  "resolutions": {
+    "@babel/traverse": "7.23.9",
+    "semver": "7.5.2",
+    "word-wrap": "1.2.4"
   }
 }
