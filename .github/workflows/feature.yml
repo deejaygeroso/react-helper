@@ -43,11 +43,7 @@ jobs:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     - name: Fetch Origin Main
-      run: pnpm github-pipeline:reset
-
-    - name: Fetch Origin Main
-      run: |
-        git fetch origin main:refs/remotes/origin/main || echo "main branch does not exist, skipping fetch"
+      run: git fetch origin main
 
     - name: Check Unformatted Files
       run: |

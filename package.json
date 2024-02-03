@@ -23,7 +23,7 @@
     "migrate:init": "nx migrate latest",
     "migrate:exec": "nx migrate --run-migrations",
     "format:check": "nx format:check",
-    "format:write": "nx format:check",
+    "format:write": "nx format:write",
     "graph": "nx graph",
     "reset": "nx reset",
     "github-pipeline:affected:lint": "nx affected:lint --base=origin/main",
