@@ -1,8 +1,7 @@
 name: Feature Pipeline
 on:
   pull_request:
-    branches:
-      - main
+
     types: [opened, synchronize]
 
 permissions:
@@ -11,6 +10,7 @@ permissions:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -26,11 +26,77 @@ jobs:
     - name: Fetch Origin Main
       run: git fetch origin main
     
-    - name: Run Lint on All Affected Code
-      run: pnpm affected:lint
-      env:
+    - name: Run Tests on All Affected Code
+      run: pnpm github-pipeline:affected:test
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-    - name: Run Tests on All Affected Code
-      run: pnpm affected:test
+    - name: Fetch Origin Main
+      run: git fetch origin main
 
+    - name: Check Unformatted Files
+      run: |
+        pnpm github-pipeline:format:write
+        if [[ $(git diff --exit-code) ]]; then
+          echo "There are uncommitted changes, stopping pipeline!"
+          exit 1
+        fi
+
+    - name: Run Lint on All Affected Code
+      run: pnpm github-pipeline:affected:lint
+      env:
+        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+  test-build:
+    name: Test Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        CACHE_KEY: release-pipeline
+
+    - name: Fetch Origin Main
+      run: git fetch origin main
+
+    - name: NX Build Packages
+      run: pnpm github-pipeline:affected:build
+
+  trivy-scan:
+    name: Trivy Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Vulnerability & Secret scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: false
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          scanners: 'secret,vuln'
+          vuln-type: 'library'
