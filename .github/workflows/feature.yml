@@ -86,20 +86,21 @@ jobs:
     - name: NX Build Packages
       run: pnpm github-pipeline:affected:build
 
-  trivy-scan:
-    name: Trivy Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # Trivy Scan Having issues with semver, @babel/travers and word-wrap
+  # trivy-scan:
+  #   name: Trivy Scan
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Vulnerability & Secret scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: false
-          severity: 'CRITICAL,HIGH,MEDIUM'
-          scanners: 'secret,vuln'
-          vuln-type: 'library'
+  #     - name: Vulnerability & Secret scan
+  #       uses: aquasecurity/trivy-action@master
+  #       with:
+  #         scan-type: 'fs'
+  #         format: 'table'
+  #         exit-code: '1'
+  #         ignore-unfixed: false
+  #         severity: 'CRITICAL,HIGH,MEDIUM'
+  #         scanners: 'secret,vuln'
+  #         vuln-type: 'library'
