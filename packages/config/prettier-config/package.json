@@ -10,9 +10,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "resolutions": {
+    "@babel/traverse": "7.23.9"
+  },
   "pnpm": {
     "overrides": {
-      "@babel/traverse": "7.32.2"
+      "@babel/traverse": "7.23.9"
     }
   }
 }
