@@ -28,7 +28,7 @@ importers:
         specifier: 7.21.4
         version: 7.21.4
       '@babel/preset-react':
-        specifier: ^7.14.5
+        specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.21.4)
       '@babel/preset-typescript':
         specifier: 7.21.4
@@ -82,13 +82,13 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0(typescript@5.3.3)
       '@swc-node/register':
-        specifier: ~1.6.7
+        specifier: ~1.6.8
         version: 1.6.8(@swc/core@1.3.107)(@swc/types@0.1.5)(typescript@5.3.3)
       '@swc/core':
         specifier: 1.3.107
         version: 1.3.107(@swc/helpers@0.5.3)
       '@swc/helpers':
-        specifier: ~0.5.2
+        specifier: ~0.5.3
         version: 0.5.3
       '@testing-library/react':
         specifier: 14.0.0
@@ -124,10 +124,10 @@ importers:
         specifier: 0.31.4
         version: 0.31.4(vitest@1.2.2)
       '@vitest/coverage-v8':
-        specifier: ^1.0.4
+        specifier: ^1.2.2
         version: 1.2.2(vitest@1.2.2)
       '@vitest/ui':
-        specifier: ^1.0.4
+        specifier: ^1.2.2
         version: 1.2.2(vitest@1.2.2)
       babel-loader:
         specifier: 9.1.2
@@ -193,7 +193,7 @@ importers:
         specifier: 4.3.1
         version: 4.3.1(typescript@5.3.3)(vite@5.0.12)
       vitest:
-        specifier: ^1.0.4
+        specifier: ^1.2.2
         version: 1.2.2(@types/node@18.19.14)(@vitest/ui@1.2.2)(jsdom@22.1.0)
 
   packages/ui:
@@ -7621,7 +7621,7 @@ packages:
   /builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.5.4
+      semver: 7.5.3
     dev: true
 
   /bytes@3.0.0:
@@ -7784,6 +7784,11 @@ packages:
 
   /cli-spinners@2.6.1:
     resolution: {integrity: sha512-x/5fWmGMnbKQAaNwN+UZlV79qBLM9JFnJuJ03gIi5whrob0xV0ofNVHy9DhwGdsMJQc2OKv0oGmLzvaqvAVv+g==}
+    engines: {node: '>=6'}
+    dev: true
+
+  /cli-spinners@2.9.2:
+    resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
     dev: true
 
@@ -9460,7 +9465,7 @@ packages:
       foreground-child: 3.1.1
       jackspeak: 2.3.6
       minimatch: 9.0.3
-      minipass: 5.0.0
+      minipass: 7.0.4
       path-scurry: 1.10.1
     dev: true
 
@@ -10336,7 +10341,7 @@ packages:
       acorn: 8.11.3
       eslint-visitor-keys: 3.4.3
       espree: 9.6.1
-      semver: 7.5.4
+      semver: 7.5.3
     dev: true
 
   /jsonc-parser@3.2.0:
@@ -10778,9 +10783,9 @@ packages:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
 
-  /minipass@5.0.0:
-    resolution: {integrity: sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ==}
-    engines: {node: '>=8'}
+  /minipass@7.0.4:
+    resolution: {integrity: sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ==}
+    engines: {node: '>=16 || 14 >=14.17'}
     dev: true
 
   /mixme@0.5.10:
@@ -10901,7 +10906,7 @@ packages:
     dependencies:
       hosted-git-info: 7.0.1
       proc-log: 3.0.0
-      semver: 7.5.4
+      semver: 7.5.3
       validate-npm-package-name: 5.0.0
     dev: true
 
@@ -11124,7 +11129,7 @@ packages:
       bl: 4.1.0
       chalk: 4.1.2
       cli-cursor: 3.1.0
-      cli-spinners: 2.6.1
+      cli-spinners: 2.9.2
       is-interactive: 1.0.0
       log-symbols: 4.1.0
       strip-ansi: 6.0.1
@@ -11267,7 +11272,7 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       lru-cache: 10.2.0
-      minipass: 5.0.0
+      minipass: 7.0.4
     dev: true
 
   /path-to-regexp@0.1.7:
