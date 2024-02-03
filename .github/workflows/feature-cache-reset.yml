@@ -1,0 +1,36 @@
+name: Reset NX Cache In Feature Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      reset_cache:
+        description: 'Set to true to reset nx cache in feature pipeline'
+        required: true
+        default: 'false'
+      branch_name:
+        description: 'Add the branch name you want the cache to reset'
+        required: true
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  cache-reset:
+    name: Reset NX Cache
+    if: ${{ github.event.inputs.reset_cache == 'true' }}
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+    
+    - name: Setup
+      uses: ./.github/actions/setup
+      with:
+        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        CACHE_KEY: feature_branch::${{ github.event.inputs.branch_name }}
+
+    - name: Reset Cache
+      run: pnpm github-pipeline:reset
