@@ -1,7 +1,6 @@
 name: Feature Pipeline
 on:
   pull_request:
-
     types: [opened, synchronize]
 
 permissions:
