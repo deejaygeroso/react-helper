@@ -3,8 +3,10 @@
 /coverage
 tsconfig*.json
 *.md
+*.mdx
 *.yaml
 *.yml
 *.json
-.prettierrc
+*.sh
+.*
 /.nx/cache
