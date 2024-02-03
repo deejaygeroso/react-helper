@@ -29,6 +29,12 @@ jobs:
       with:
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
+    - name: Fetch Origin Main
+      run: git fetch origin main
+
+    - name: NX Build Packages
+      run: pnpm github-pipeline:affected:build
+
     - name: Publish Packages
       run: echo "Publish"
 
