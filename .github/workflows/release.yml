@@ -1,11 +1,9 @@
 name: Release Pipeline
 
 on:
-  workflow_run:
-    workflows:
-      - Merge To Master
-    types:
-      - completed
+  push:
+    branches:
+      - master
 
 permissions:
   id-token: write

@@ -19,7 +19,7 @@ jobs:
   cache-reset:
     name: Reset NX Cache
     if: ${{ github.event.inputs.reset_cache == 'true' }}
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
