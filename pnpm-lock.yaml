@@ -193,8 +193,6 @@ importers:
         specifier: ^1.0.4
         version: 1.2.2(@types/node@18.19.14)(@vitest/ui@1.2.2)(jsdom@22.1.0)
 
-  packages/test: {}
-
   packages/ui:
     devDependencies:
       '@changesets/cli':
