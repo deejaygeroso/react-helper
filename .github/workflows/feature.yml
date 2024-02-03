@@ -44,7 +44,7 @@ jobs:
 
     - name: Fetch Origin Main
       run: |
-        git fetch origin main || echo "main branch does not exist, skipping fetch"
+        git fetch origin test || echo "test branch does not exist, skipping fetch"
 
     - name: Check Unformatted Files
       run: |
