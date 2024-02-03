@@ -95,10 +95,6 @@
     "react-dom": "18.2.0",
     "styled-components": "6.1.8"
   },
-  "pnpm": {
-    "overrides": {
-    }
-  },
   "resolutions": {
     "@babel/traverse": "7.23.9",
     "semver": "7.5.2",
