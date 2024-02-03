@@ -49,7 +49,7 @@ jobs:
         CACHE_KEY:  ${{ steps.feature_branch.outputs.BRANCH_NAME }}
 
     - name: Fetch Origin Main
-      run: git fetch origin master
+      run: git fetch origin main
 
     - name: Check Unformatted Files
       run: |
