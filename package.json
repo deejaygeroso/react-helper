@@ -31,7 +31,6 @@
     "github-pipeline:affected:build": "nx affected:build --base=origin/main",
     "github-pipeline:format:write": "nx format:check --base=origin/main",
     "github-pipeline:reset": "nx reset"
-    
   },
   "private": true,
   "devDependencies": {
@@ -98,17 +97,17 @@
     "styled-components": "6.1.8"
   },
   "resolutions": {
-    "@babel/traverse": "7.23.9",
-    "@types/semver": "7.5.2",
-    "semver": "7.5.2",
-    "word-wrap": "1.2.4"
+    "@babel/traverse": "^7.23.9",
+    "@types/semver": "^7.5.2",
+    "semver": "^7.5.2",
+    "word-wrap": "^1.2.4"
   },
   "pnpm": {
     "overrides": {
-      "@babel/traverse": "7.23.9",
-      "@types/semver": "7.5.2",
-      "semver": "7.5.2",
-      "word-wrap": "1.2.4"
+      "@babel/traverse": "^7.23.9",
+      "@types/semver": "^7.5.2",
+      "semver": "^7.5.2",
+      "word-wrap": "^1.2.4"
     }
   }
 }
