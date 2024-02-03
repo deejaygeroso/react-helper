@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -44,11 +44,10 @@ jobs:
 
     - name: Fetch Origin Main
       run: |
-        git fetch origin test || echo "test branch does not exist, skipping fetch"
+        git git fetch origin main:refs/remotes/origin/main || echo "main branch does not exist, skipping fetch"
 
     - name: Check Unformatted Files
       run: |
-        git fetch origin main || echo "main branch does not exist, skipping fetch"
         pnpm github-pipeline:format:write
         if [[ $(git diff --exit-code) ]]; then
           echo "There are uncommitted changes, stopping pipeline!"
