@@ -38,15 +38,10 @@ jobs:
       with:
         fetch-depth: 2
 
-    - name: Get Branch Name
-      id: feature_branch
-      run: echo "BRANCH_NAME=feature_branch::${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-    
     - name: Setup
       uses: ./.github/actions/setup
       with:
-        GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        CACHE_KEY:  ${{ steps.feature_branch.outputs.BRANCH_NAME }}
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     - name: Fetch Origin Main
       run: git fetch origin main
