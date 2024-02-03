@@ -34,3 +34,20 @@ jobs:
     - name: Run Tests on All Affected Code
       run: pnpm affected:test
 
+  trivy-scan:
+    name: Trivy Scan
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Vulnerability & Secret scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: false
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          scanners: 'secret,vuln'
+          vuln-type: 'library'
