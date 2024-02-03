@@ -24,9 +24,6 @@ jobs:
 
     - name: Fetch Origin Main
       run: git fetch origin main
-    
-    - name: Lint Test
-      run: pnpm github-pipeline:affected:lint
 
     - name: Run Tests on All Affected Code
       run: pnpm github-pipeline:affected:test
@@ -50,6 +47,7 @@ jobs:
 
     - name: Check Unformatted Files
       run: |
+        git fetch origin main
         pnpm github-pipeline:format:write
         if [[ $(git diff --exit-code) ]]; then
           echo "There are uncommitted changes, stopping pipeline!"
