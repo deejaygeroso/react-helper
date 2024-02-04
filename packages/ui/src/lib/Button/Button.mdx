@@ -1,0 +1,27 @@
+import { ArgTypes, Meta, Source, Unstyled } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+
+import Button from './Button';
+
+# Button
+Buttons let users take actions and make choices with a single tap.
+- [Component](#component)
+- [Props](#props)
+
+<Meta title='ui/Button' />
+
+## Component
+<Unstyled>
+  <Button>Click Me</Button>
+</Unstyled>
+
+<Source code={`
+import { Button } from '@react-helper/ui';
+
+<Button onClick={handleClick}>Submit</Button>
+`} dark />
+
+## Props
+Button component is an extension of [Mui's button component](https://mui.com/base-ui/react-button/components-api/#button).  
+It accepts all the props that Mui's button component accepts. 
+<ArgTypes of={ButtonStories.UIStory} />
