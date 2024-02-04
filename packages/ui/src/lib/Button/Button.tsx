@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 import { ButtonProps } from './Button.types';
 
-function Button(props: ButtonProps): ReactElement {
+function Button(props: Readonly<ButtonProps>): ReactElement {
   const { variant = 'contained', ...otherProps } = props;
   if (variant === 'outlined') {
     return (
@@ -13,6 +13,7 @@ function Button(props: ButtonProps): ReactElement {
       />
     );
   }
+
   return (
     <button
       type='button'

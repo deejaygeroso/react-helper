@@ -1,32 +1,13 @@
 {
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"eslint.format.enable": true,
-	"eslint.alwaysShowStatus": true,
-	"editor.detectIndentation": false,
-	"typescript.validate.enable": false,
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
+  "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2
-  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "eslint.format.enable": true,
+  "files.eol": "\n",
   "cSpell.words": [
     "trivy"
   ]

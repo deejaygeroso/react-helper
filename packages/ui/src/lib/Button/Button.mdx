@@ -7,6 +7,7 @@ import Button from './Button';
 Buttons let users take actions and make choices with a single tap.
 - [Component](#component)
 - [Props](#props)
+- [Variant](#variant)
 
 <Meta title='ui/Button' />
 
@@ -25,3 +26,18 @@ import { Button } from '@react-helper/ui';
 Button component is an extension of [Mui's button component](https://mui.com/base-ui/react-button/components-api/#button).  
 It accepts all the props that Mui's button component accepts. 
 <ArgTypes of={ButtonStories.UIStory} />
+
+## Variants
+<Unstyled>
+  <div style={{ display: 'flex', alignItems: 'center', gap: 10}}>
+    <Button variant='contained'>Contained</Button>
+    <Button variant='outlined'>Outined</Button>
+  </div>
+</Unstyled>
+
+<Source code={`
+import { Button } from '@react-helper/ui';
+
+<Button variant='contained'>Contained</Button>
+<Button variant='outlined'>Outined</Button>
+`} dark />
