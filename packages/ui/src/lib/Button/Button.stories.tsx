@@ -35,7 +35,8 @@ export const UIStory: StoryObj<typeof Story> = {
       description: 'The props used for each slot inside the Button.',
     },
     slots: {
-      description: 'The components used for each slot inside the Button. Either a string to use a HTML element or a component.',
+      description:
+        'The components used for each slot inside the Button. Either a string to use a HTML element or a component.',
     },
   },
   parameters: {
