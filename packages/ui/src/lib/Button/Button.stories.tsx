@@ -1,15 +1,15 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import AppThemeProvider from '../AppThemeProvider';
 import Button from './Button';
 
-const Story: ComponentMeta<typeof Button> = {
+const Story: Meta<typeof Button> = {
   component: Button,
-  title: 'Button',
+  title: 'ui/Button',
 };
 export default Story;
 
-const Template: ComponentStory<typeof Button> = args => (
+const Template: StoryFn<typeof Button> = args => (
   <AppThemeProvider>
     <Button
       {...args}
@@ -23,6 +23,4 @@ const Template: ComponentStory<typeof Button> = args => (
 
 export const PrimaryButton = Template.bind({});
 
-PrimaryButton.args = {
-  buttonType: 'Primary',
-};
+PrimaryButton.args = { };

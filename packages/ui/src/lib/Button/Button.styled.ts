@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { Button as BaseButton } from '@mui/base/Button';
 
-import { ButtonStyledProps } from './Button.types';
+import { ButtonProps } from './Button.types';
 
-export const Button = styled.button<ButtonStyledProps>`
+export const Button = styled(BaseButton)<ButtonProps>`
   font-weight: 600;
   font-size: 14px;
   height: 35px;
-  border-radius: 5px;
+  border-radius: 5px;   
   border: 0;
   background: #007bff;
   color: white;

@@ -1,13 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { ButtonProps as MuiButtonProps } from '@mui/base';
 
 export type ButtonTypes = 'Primary' | 'Secondary' | 'Success' | 'Warning' | 'Danger';
 
-export interface ButtonProps extends PropsWithChildren {
-  disabled?: boolean;
-  buttonType?: ButtonTypes;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+export type ButtonProps = MuiButtonProps
 
-export interface ButtonStyledProps {
-  $buttonType: ButtonTypes;
-}
